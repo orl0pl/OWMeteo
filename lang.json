@@ -1,0 +1,16 @@
+{
+    "pl": {
+        "title": "pogoda",
+        "app": {
+            "rain": "deszcz",
+            "rain-chance": "szansa na deszcz"
+        }
+    },
+    "en":{
+        "title": "2eather",
+        "app": {
+            "rain": "rain",
+            "rain-chance": "rain chance"
+        }
+    }
+}

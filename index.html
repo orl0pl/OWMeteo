@@ -13,7 +13,10 @@
             --background: #fff;
             --now-b: rgb(117, 117, 255);
         }
-
+        .darkmode {
+            background-color: #000;
+            color: #fff;
+        }
         html {
             font-family: 'Ubuntu', sans-serif;
             background-color: rgb(255, 255, 255);
@@ -101,6 +104,9 @@
 
 <body onload="load();">
     <script>
+        fetch('lang.json').then(data => data.json).then(data => {
+            console.log(data)
+        })
         function load() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(pos);
