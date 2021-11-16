@@ -89,7 +89,7 @@
             margin: 1vh;
             position: fixed;
             top: 15vh;
-            left: 30vw;
+            left: 40vw;
             display: inline;
             color: #fff;
         }
@@ -99,22 +99,44 @@
             position: relative;
             left: 14vh;
         }
+        #lang {
+            position: absolue;
+            right: 0px;
+        }
     </style>
 </head>
 
 <body onload="load();">
     <script>
-        fetch('lang.json').then(data => data.json).then(data => {
+        function lang(){
+            fetch('lang.json').then(data => data.json()).then(data => {
             console.log(data)
-        })
+            var savedLang = localStorage.getItem('lang');
+            if(savedLang !== 'pl'|| savedLang !== 'en') {
+                localStorage.setItem('lang', 'en');
+            }
+            document.getElementById('welcome').innerHTML = data[savedLang].title
+            })
+        }
+        function setLang(){
+            if(localStorage.getItem('lang') == 'pl') {
+                localStorage.setItem('lang', 'en');
+                lang()
+            }
+            if(localStorage.getItem('lang') == 'en') {
+                localStorage.setItem('lang', 'pl');
+                lang()
+            }
+        }
         function load() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(pos);
             }
+            lang()
         }
         function pos(pos) {
 
-            fetch('https://api.openweathermap.org/data/2.5/onecall?lat=' + pos.coords.latitude + '&lon=' + pos.coords.longitude + '&appid='+'https://openweathermap.org')
+            fetch('https://api.openweathermap.org/data/2.5/onecall?lat=' + pos.coords.latitude + '&lon=' + pos.coords.longitude + '&appid='+'x')
                 .then((response) => {
                     return response.json();
                 })
@@ -122,9 +144,14 @@
                     document.getElementById('icon').setAttribute('src', icons(data.current.weather[0].icon))
                     console.log(data)
                     var now = new Date(data.current.dt);
-                    document.getElementById('welcome').innerHTML = 'Pogoda, <br>'
                     document.getElementById('temp').innerHTML = Math.round((data.current.temp-273.15))+'º';
                     document.getElementById('time').innerHTML = now.getHours().toString()+':'+now.getMinutes().toString()
+                    for(i=0; i<Object.keys(data.hourly).length; i++) {
+                        var hour = document.createElement('DIV')
+                        hour.innerHTML = i;
+                        hour.className = 'minibox'
+                        document.getElementById('row2').appendChild(hour)
+                    }
                 });
         }
         function icons(icon, code) {
@@ -166,24 +193,14 @@
             }
         }
     </script>
+    <div id="settings"><img src="lang.svg" onclick="setLang()"></div>
     <span id="welcome"></span><br>
     <div id="row1">
         <div class="mediumbox" id="mediumbox1"><img id="icon" src="weather-icons-master\svg\wi-refresh.svg"><div id="temp">1</div><div id="time">22:22</div></div>
 
     </div>
     <div id="row2">
-        <div class="minibox" id="minibox1">
-            <div class="content">Moce planety</div>
-        </div>
-        <div class="minibox" id="minibox2">
-            <div class="content">Lorem planety</div>
-        </div>
-        <div class="minibox" id="minibox1">
-            <div class="content">Moce planety</div>
-        </div>
-        <div class="minibox" id="minibox2">
-            <div class="content">Lorem planety</div>
-        </div>
+        
     </div>
 </body>
 

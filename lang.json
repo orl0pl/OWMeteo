@@ -7,7 +7,7 @@
         }
     },
     "en":{
-        "title": "2eather",
+        "title": "Weather",
         "app": {
             "rain": "rain",
             "rain-chance": "rain chance"
