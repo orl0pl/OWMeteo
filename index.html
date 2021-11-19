@@ -71,6 +71,8 @@
             left: 0px;
             width: 100%;
             border-radius: 4px 4px 0 0;
+            font-size: 6vh;
+            text-align: center;
         }
 
         .mediumbox #icon{
@@ -89,7 +91,7 @@
             margin: 1vh;
             position: fixed;
             top: 15vh;
-            left: 40vw;
+            left: 20vw;
             display: inline;
             color: #fff;
         }
@@ -134,9 +136,12 @@
             }
             lang()
         }
+        function toC(temp) {
+            return Math.round((temp-273.15))+'º';
+        }
         function pos(pos) {
 
-            fetch('https://api.openweathermap.org/data/2.5/onecall?lat=' + pos.coords.latitude + '&lon=' + pos.coords.longitude + '&appid='+'x')
+            fetch('https://api.openweathermap.org/data/2.5/onecall?lat=' + pos.coords.latitude + '&lon=' + pos.coords.longitude + '&appid='+'8bf38ea1cc24c809acd8484cf88ad776')
                 .then((response) => {
                     return response.json();
                 })
@@ -148,8 +153,11 @@
                     document.getElementById('time').innerHTML = now.getHours().toString()+':'+now.getMinutes().toString()
                     for(i=0; i<Object.keys(data.hourly).length; i++) {
                         var hour = document.createElement('DIV')
-                        hour.innerHTML = i;
+                        var hrtemp = document.createElement('DIV')
+                        hrtemp.innerHTML = toC(data.hourly[i].temp);
+                        hrtemp.className = 'content'
                         hour.className = 'minibox'
+                        hour.appendChild(hrtemp)
                         document.getElementById('row2').appendChild(hour)
                     }
                 });
