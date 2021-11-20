@@ -8,7 +8,14 @@
     <title>Document</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
-
+        ::-webkit-scrollbar {
+            width: 2vw;
+            background-color: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: #09f;
+            border-radius: 2vw;
+        }
         :root {
             --background: #fff;
             --now-b: rgb(117, 117, 255);
@@ -29,8 +36,8 @@
         .minibox {
             width: 20vh;
             height: 28vh;
-            background-color: #777;
-            border-radius: 4px;
+            background-color: #09f;
+            border-radius: 1vh;
             margin-left: 1vw;
             margin-right: 1vw;
             margin-top: 1vh;
@@ -70,7 +77,7 @@
             bottom: 0px;
             left: 0px;
             width: 100%;
-            border-radius: 4px 4px 0 0;
+            border-radius: 1vh;
             font-size: 6vh;
             text-align: center;
         }
@@ -97,9 +104,8 @@
             align-self: center;
             font-size: 9vh;
             margin: 1vh;
-            position: absolute;
-            top: 15vh;
-            left: 20vw;
+            position: relative;
+            bottom: 12vh;
             display: inline;
             color: #fff;
         }
@@ -147,9 +153,21 @@
         function toC(temp) {
             return Math.round((temp-273.15))+'º';
         }
+        function rain(data){
+            var raindiv = document.getElementById('row3');
+            for(var i=0;i<Object.keys(data.minutely).length;i++){
+                console.log(data.minutely[i].precipitation)
+                if(data.minutely[i].precipitation > 0 && data.minutly[i].precipitation < 2.5){
+                    raindiv.innerText('Lekki deszcz')
+                }
+                if(data.minutely[i].precipitation = 0){
+                    raindiv.innerText('Brak opadów')
+                }
+            }
+        }
         function pos(pos) {
 
-            fetch('https://api.openweathermap.org/data/2.5/onecall?lat=' + pos.coords.latitude + '&lon=' + pos.coords.longitude + '&appid='+'8bf38ea1cc24c809acd8484cf88ad776')
+            fetch('https://api.openweathermap.org/data/2.5/onecall?lat=' + pos.coords.latitude + '&lon=' + pos.coords.longitude + '&appid='+'')
                 .then((response) => {
                     return response.json();
                 })
@@ -158,8 +176,9 @@
                     console.log(data)
                     var now = new Date(data.current.dt * 1000);
                     document.getElementById('temp').innerHTML = Math.round((data.current.temp-273.15))+'º';
-                    document.getElementById('time').innerHTML = d.toLocaleTimeString().substring(0, d.toLocaleTimeString().length-3)
-                    for(i=0; i<Object.keys(data.hourly).length; i++) {
+                    document.getElementById('time').innerHTML = now.toLocaleTimeString().substring(0, now.toLocaleTimeString().length-3)
+                    rain(data)
+                    for(i=0; i<Object.keys(data.hourly).length-1; i++) {
                         var d = new Date(data.hourly[i].dt * 1000);
                         var hour = document.createElement('DIV')
                         var hrtemp = document.createElement('DIV')
@@ -227,6 +246,7 @@
     <div id="row2">
         
     </div>
+    <div id="row3"><div id="raindiv"></div></div>
 </body>
 
 </html>
