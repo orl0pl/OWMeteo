@@ -4,6 +4,10 @@
         "app": {
             "rain": "deszcz",
             "rain-chance": "szansa na deszcz"
+        },
+        "search": {
+            "input": "Znajdź miasto",
+            "error": "Nie znaleziono"
         }
     },
     "en":{
@@ -11,6 +15,10 @@
         "app": {
             "rain": "rain",
             "rain-chance": "rain chance"
+        },
+        "search": {
+            "input": "Search for a city",
+            "error": "Api say"
         }
     }
 }
