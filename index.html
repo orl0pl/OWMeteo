@@ -204,7 +204,7 @@
                     document.getElementById('temp').innerHTML = Math.round((data.current.temp-273.15))+'º';
                     document.getElementById('time').innerHTML = now.toLocaleTimeString().substring(0, now.toLocaleTimeString().length-3)
                     document.getElementById('windicon').style.transform = 'rotate('+data.current.wind_deg+'deg)'; 
-                    document.getElementById('windspeed').innerHTML = (data.current.wind_speed / 10)+'m/s'
+                    document.getElementById('windspeed').innerHTML = (Math.round(data.current.wind_speed * 10) / 10)+'m/s'
                     //rain(data)
                     for(i=1; i<Object.keys(data.hourly).length-1; i++) {
                         var d = new Date(data.hourly[i].dt * 1000);
