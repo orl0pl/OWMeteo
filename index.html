@@ -27,6 +27,7 @@
         html {
             font-family: 'Ubuntu', sans-serif;
             background-color: rgb(255, 255, 255);
+            user-select: none;
         }
 
         #welcome {
@@ -232,7 +233,7 @@
                         var dyhr = document.createElement('DIV')
                         console.log(d)
                         dyhr.className = 'time'
-                        dyhr.innerHTML = d.toLocaleTimeString().substring(0, d.toLocaleTimeString().length-3)
+                        dyhr.innerHTML = d.toLocaleTimeString().substring(0, d.toLocaleDateString().length-5)
                         day.appendChild(dyhr)
                         dyicon.setAttribute('src', icons(data.daily[n].weather[0].icon))
                         dyicon.className = 'icon'
