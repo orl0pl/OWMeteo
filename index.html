@@ -182,6 +182,7 @@
                     var now = new Date(data.current.dt * 1000);
                     document.getElementById('temp').innerHTML = Math.round((data.current.temp-273.15))+'º';
                     document.getElementById('time').innerHTML = now.toLocaleTimeString().substring(0, now.toLocaleTimeString().length-3)
+
                     rain(data)
                     for(i=1; i<Object.keys(data.hourly).length-1; i++) {
                         var d = new Date(data.hourly[i].dt * 1000);
@@ -201,7 +202,7 @@
                         hour.appendChild(hrtemp)
                         document.getElementById('row2').appendChild(hour)
                     }
-                    for(n=0; i<7; n++) {
+                    for(n=0; n<7; n++) {
                         var d = new Date(data.daily[n].dt * 1000);
                         var day = document.createElement('DIV')
                         var dytemp = document.createElement('DIV')
@@ -266,7 +267,14 @@
     <input type="search">
     <h3>Teraz</h3>
     <div id="row1">
-        <div class="mediumbox" id="mediumbox1"><img id="icon" src="weather-icons-master\svg\wi-refresh.svg"><div id="temp">1</div><div id="time">22:22</div></div>
+        <div class="mediumbox" id="mediumbox1"><img id="icon" src="weather-icons-master\svg\wi-refresh.svg">
+            <div id="temp">1</div>
+            <div id="wind">
+                <div id="windspeed">2.6m/s</div>
+                <img src="weather-icons-master/svg/wi-wind-deg.svg">
+            </div>
+            <div id="time">22:22</div>
+        </div>
 
     </div>
     <h3>Prognoza godzinowa</h3>
