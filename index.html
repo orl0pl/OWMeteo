@@ -75,6 +75,11 @@
 
             white-space: nowrap;
         }
+        #row4 {
+            overflow-x: auto;
+
+            white-space: nowrap;
+        }
         .minibox .content {
             background-color: var(--background);
             position: static;
@@ -157,10 +162,16 @@
         function toC(temp) {
             return Math.round((temp-273.15))+'º';
         }
-        function rain(data){
+        /*function rain(data){
             var raindiv = document.getElementById('row3');
             for(var i=0;i<Object.keys(data.minutely).length;i++){
                 console.log(data.minutely[i].precipitation)
+                if(data.minutly[i].precipitation < 7.5){
+                    raindiv.innerText('Silny deszcz')
+                }
+                if(data.minutely[i].precipitation > 2.5 && data.minutly[i].precipitation < 7.5){
+                    raindiv.innerText('Umiarkowany deszcz')
+                }
                 if(data.minutely[i].precipitation > 0 && data.minutly[i].precipitation < 2.5){
                     raindiv.innerText('Lekki deszcz')
                 }
@@ -168,7 +179,7 @@
                     raindiv.innerText('Brak opadów')
                 }
             }
-        }
+        }*/
         function pos(pos) {
 
             fetch('https://api.openweathermap.org/data/2.5/onecall?lat=' + pos.coords.latitude + '&lon=' + pos.coords.longitude + '&appid='+'911062246487cff1d7ff93826a7e4078')
@@ -183,7 +194,7 @@
                     document.getElementById('temp').innerHTML = Math.round((data.current.temp-273.15))+'º';
                     document.getElementById('time').innerHTML = now.toLocaleTimeString().substring(0, now.toLocaleTimeString().length-3)
 
-                    rain(data)
+                    //rain(data)
                     for(i=1; i<Object.keys(data.hourly).length-1; i++) {
                         var d = new Date(data.hourly[i].dt * 1000);
                         var hour = document.createElement('DIV')
@@ -215,7 +226,7 @@
                         dyicon.setAttribute('src', icons(data.daily[n].weather[0].icon))
                         dyicon.className = 'icon'
                         day.appendChild(dyicon)
-                        dytemp.innerHTML = toC(data.daily[n].temp);
+                        dytemp.innerHTML = toC(data.daily[n].temp.day) +'|'+ toC(data.daily[n].temp.night);
                         dytemp.className = 'content'
                         day.className = 'minibox'
                         day.appendChild(dytemp)
@@ -271,7 +282,7 @@
             <div id="temp">1</div>
             <div id="wind">
                 <div id="windspeed">2.6m/s</div>
-                <img src="weather-icons-master/svg/wi-wind-deg.svg">
+                <img id="windicon" src="weather-icons-master/svg/wi-wind-deg.svg">
             </div>
             <div id="time">22:22</div>
         </div>
