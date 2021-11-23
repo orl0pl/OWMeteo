@@ -75,6 +75,7 @@
             overflow-x: auto;
 
             white-space: nowrap;
+            border-top: 1vh solid #09f;
         }
         #row4 {
             overflow-x: auto;
@@ -213,6 +214,8 @@
                         var hrtemp = document.createElement('DIV')
                         var hricon = document.createElement('IMG')
                         var hrhr = document.createElement('DIV')
+                        hour.setAttribute('onclick', 'divdata('+i+')')
+                        hour.setAttribute('id', 'hr'+i)
                         hrhr.className = 'time'
                         hrhr.innerHTML = d.toLocaleTimeString().substring(0, d.toLocaleTimeString().length-3)
                         hour.appendChild(hrhr)
@@ -225,6 +228,9 @@
                         hour.appendChild(hrtemp)
                         document.getElementById('row2').appendChild(hour)
                     }
+                    function divdata(index){
+                        document.getElementById('hr'+index)
+                    }
                     for(n=0; n<7; n++) {
                         var d = new Date(data.daily[n].dt * 1000);
                         var day = document.createElement('DIV')
@@ -232,6 +238,13 @@
                         var dyicon = document.createElement('IMG')
                         var dyhr = document.createElement('DIV')
                         console.log(d)
+                        var today = new Date();
+                        var dd = String(today.getDate()).padStart(2, '0');
+                        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                        var yyyy = today.getFullYear();
+
+                        today = dd + '/' + mm + '/' + yyyy;
+                        dyhr.innerHTML = today;
                         dyhr.className = 'time'
                         dyhr.innerHTML = d.getDay()+'.'+(d.getMonth()+1)
                         day.appendChild(dyhr)
@@ -303,7 +316,7 @@
     <h3>Prognoza godzinowa</h3>
     <div id="row2">
     </div>
-    <div id="row3"><div id="raindiv"></div></div>
+    <div id="row3">opis</div>
     <h3>Prognoza 7 dniowa</h3>
     <div id="row4"></div>
     <footer>Thanks for icons from erikflowers ❤</footer>
