@@ -79,7 +79,7 @@
 
         #row3 {
             overflow-x: auto;
-
+            display: none;
             white-space: nowrap;
             border-top: 1vh solid #09f;
         }
@@ -166,7 +166,7 @@
     <script>
         function divdata(index) {
             document.getElementById('row3').innerHTML = index
-            console.log(index)
+            document.getElementById('row3').style.display = 'block'
         }
         function lang() {
             fetch('lang.json').then(data => data.json()).then(data => {
