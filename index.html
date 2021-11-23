@@ -8,22 +8,27 @@
     <title>Document</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+
         ::-webkit-scrollbar {
             width: 2vw;
             background-color: transparent;
         }
+
         ::-webkit-scrollbar-thumb {
             background-color: #09f;
             border-radius: 2vw;
         }
+
         :root {
             --background: #fff;
             --now-b: rgb(117, 117, 255);
         }
+
         .darkmode {
             background-color: #000;
             color: #fff;
         }
+
         html {
             font-family: 'Ubuntu', sans-serif;
             background-color: rgb(255, 255, 255);
@@ -71,17 +76,20 @@
 
             white-space: nowrap;
         }
+
         #row3 {
             overflow-x: auto;
 
             white-space: nowrap;
             border-top: 1vh solid #09f;
         }
+
         #row4 {
             overflow-x: auto;
 
             white-space: nowrap;
         }
+
         .minibox .content {
             background-color: var(--background);
             position: static;
@@ -92,25 +100,29 @@
             font-size: 6vh;
             text-align: center;
         }
+
         .minibox .time {
             background-color: var(--background);
             text-align: center;
         }
+
         .icon {
             text-align: center;
             width: 17vh;
         }
 
-        .mediumbox #icon{
+        .mediumbox #icon {
             align-self: center;
             height: 20vh;
             display: inline-block;
             margin-left: 0.01vw;
             filter: invert(1);
         }
-        svg{
+
+        svg {
             filter: invert(0.5) sepia(1) saturate(5) hue-rotate(175deg)
         }
+
         .mediumbox #temp {
             align-self: center;
             font-size: 9vh;
@@ -120,25 +132,30 @@
             display: inline;
             color: #fff;
         }
+
         .mediumbox #time {
             align-self: center;
             display: inline-block;
             position: relative;
             left: -7vh;
         }
+
         #lang {
             position: absolue;
             right: 0px;
         }
-        #windicon{
+
+        #windicon {
             height: 7vh;
             filter: invert(1)
         }
-        #wind{
+
+        #wind {
             display: inline-block;
             position: relative;
             top: -10vh;
         }
+
         .minibox .icon {
             filter: invert(1);
         }
@@ -147,22 +164,25 @@
 
 <body onload="load();">
     <script>
-        function lang(){
+        function divdata(index) {
+                            document.getElementById('#row3').innerHTML = index
+        }
+        function lang() {
             fetch('lang.json').then(data => data.json()).then(data => {
-            console.log(data)
-            var savedLang = localStorage.getItem('lang');
-            if(savedLang !== 'pl'|| savedLang !== 'en') {
-                localStorage.setItem('lang', 'en');
-            }
-            document.getElementById('welcome').innerHTML = data[savedLang].title
+                console.log(data)
+                var savedLang = localStorage.getItem('lang');
+                if (savedLang !== 'pl' || savedLang !== 'en') {
+                    localStorage.setItem('lang', 'en');
+                }
+                document.getElementById('welcome').innerHTML = data[savedLang].title
             })
         }
-        function setLang(){
-            if(localStorage.getItem('lang') == 'pl') {
+        function setLang() {
+            if (localStorage.getItem('lang') == 'pl') {
                 localStorage.setItem('lang', 'en');
                 lang()
             }
-            if(localStorage.getItem('lang') == 'en') {
+            if (localStorage.getItem('lang') == 'en') {
                 localStorage.setItem('lang', 'pl');
                 lang()
             }
@@ -174,7 +194,7 @@
             lang()
         }
         function toC(temp) {
-            return Math.round((temp-273.15))+'º';
+            return Math.round((temp - 273.15)) + 'º';
         }
         /*function rain(data){
             var raindiv = document.getElementById('row3');
@@ -196,28 +216,28 @@
         }*/
         function pos(pos) {
 
-            fetch('https://api.openweathermap.org/data/2.5/onecall?lat=' + pos.coords.latitude + '&lon=' + pos.coords.longitude + '&appid='+'911062246487cff1d7ff93826a7e4078')
-                .then((response) => {return response.json();})
+            fetch('https://api.openweathermap.org/data/2.5/onecall?lat=' + pos.coords.latitude + '&lon=' + pos.coords.longitude + '&appid=' + '911062246487cff1d7ff93826a7e4078')
+                .then((response) => { return response.json(); })
                 .then((data) => {
                     document.getElementById('icon').setAttribute('src', icons(data.current.weather[0].icon))
                     console.log(data)
                     console.log(data.daily[1])
                     var now = new Date(data.current.dt * 1000);
-                    document.getElementById('temp').innerHTML = Math.round((data.current.temp-273.15))+'º';
-                    document.getElementById('time').innerHTML = now.toLocaleTimeString().substring(0, now.toLocaleTimeString().length-3)
-                    document.getElementById('windicon').style.transform = 'rotate('+data.current.wind_deg+'deg)'; 
-                    document.getElementById('windspeed').innerHTML = (Math.round(data.current.wind_speed * 10) / 10)+'m/s'
+                    document.getElementById('temp').innerHTML = Math.round((data.current.temp - 273.15)) + 'º';
+                    document.getElementById('time').innerHTML = now.toLocaleTimeString().substring(0, now.toLocaleTimeString().length - 3)
+                    document.getElementById('windicon').style.transform = 'rotate(' + data.current.wind_deg + 'deg)';
+                    document.getElementById('windspeed').innerHTML = (Math.round(data.current.wind_speed * 10) / 10) + 'm/s'
                     //rain(data)
-                    for(i=1; i<Object.keys(data.hourly).length-1; i++) {
+                    for (i = 1; i < Object.keys(data.hourly).length - 1; i++) {
                         var d = new Date(data.hourly[i].dt * 1000);
                         var hour = document.createElement('DIV')
                         var hrtemp = document.createElement('DIV')
                         var hricon = document.createElement('IMG')
                         var hrhr = document.createElement('DIV')
-                        hour.setAttribute('onclick', 'divdata('+i+')')
-                        hour.setAttribute('id', 'hr'+i)
+                        hour.setAttribute('onclick', 'divdata(' + i + ')')
+                        hour.setAttribute('id', 'hr' + i)
                         hrhr.className = 'time'
-                        hrhr.innerHTML = d.toLocaleTimeString().substring(0, d.toLocaleTimeString().length-3)
+                        hrhr.innerHTML = d.toLocaleTimeString().substring(0, d.toLocaleTimeString().length - 3)
                         hour.appendChild(hrhr)
                         hricon.setAttribute('src', icons(data.hourly[i].weather[0].icon))
                         hricon.className = 'icon'
@@ -228,10 +248,7 @@
                         hour.appendChild(hrtemp)
                         document.getElementById('row2').appendChild(hour)
                     }
-                    function divdata(index){
-                        document.getElementById('hr'+index)
-                    }
-                    for(n=0; n<7; n++) {
+                    for (n = 0; n < 7; n++) {
                         var d = new Date(data.daily[n].dt * 1000);
                         var day = document.createElement('DIV')
                         var dytemp = document.createElement('DIV')
@@ -246,12 +263,12 @@
                         today = dd + '/' + mm + '/' + yyyy;
                         dyhr.innerHTML = today;
                         dyhr.className = 'time'
-                        dyhr.innerHTML = d.getDay()+'.'+(d.getMonth()+1)
+                        dyhr.innerHTML = d.getDay() + '.' + (d.getMonth() + 1)
                         day.appendChild(dyhr)
                         dyicon.setAttribute('src', icons(data.daily[n].weather[0].icon))
                         dyicon.className = 'icon'
                         day.appendChild(dyicon)
-                        dytemp.innerHTML = toC(data.daily[n].temp.day) +'|'+ toC(data.daily[n].temp.night);
+                        dytemp.innerHTML = toC(data.daily[n].temp.day) + '|' + toC(data.daily[n].temp.night);
                         dytemp.className = 'content'
                         day.className = 'minibox'
                         day.appendChild(dytemp)
@@ -260,40 +277,40 @@
                 });
         }
         function icons(icon, code) {
-            if(icon == '01d'){
+            if (icon == '01d') {
                 return 'weather-icons-master/svg/wi-day-sunny.svg';
             }
-            if(icon == '02d'){
+            if (icon == '02d') {
                 return 'weather-icons-master/svg/wi-day-sunny-overcast.svg';
             }
-            if(icon == '03d' || icon == '03n'){
+            if (icon == '03d' || icon == '03n') {
                 return 'weather-icons-master/svg/wi-cloud.svg';
             }
-            if(icon == '04d' || icon == '04n'){
+            if (icon == '04d' || icon == '04n') {
                 return 'weather-icons-master/svg/wi-cloudy.svg';
             }
-            if(icon == '09d' || icon == '09n'){
+            if (icon == '09d' || icon == '09n') {
                 return 'weather-icons-master/svg/wi-rain.svg';
             }
-            if(icon == '10d'){
+            if (icon == '10d') {
                 return 'weather-icons-master/svg/wi-day-rain.svg';
             }
-            if(icon == '11d' || icon == '11n'){
+            if (icon == '11d' || icon == '11n') {
                 return 'weather-icons-master/svg/wi-thunderstorm.svg';
             }
-            if(icon == '13d' || icon == '13n'){
+            if (icon == '13d' || icon == '13n') {
                 return 'weather-icons-master/svg/wi-snow.svg';
             }
-            if(icon == '50d' || icon == '50n'){
+            if (icon == '50d' || icon == '50n') {
                 return 'weather-icons-master/svg/wi-fog.svg';
             }
-            if(icon == '01n'){
+            if (icon == '01n') {
                 return 'weather-icons-master/svg/wi-night-clear.svg';
             }
-            if(icon == '02n'){
+            if (icon == '02n') {
                 return 'weather-icons-master/svg/wi-night-partly-cloudy.svg';
             }
-            else{
+            else {
                 return 'weather-icons-master/svg/wi-refresh.svg'
             }
         }
