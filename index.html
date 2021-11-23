@@ -165,7 +165,8 @@
 <body onload="load();">
     <script>
         function divdata(index) {
-                            document.getElementById('#row3').innerHTML = index
+            document.getElementById('row3').innerHTML = index
+            console.log(index)
         }
         function lang() {
             fetch('lang.json').then(data => data.json()).then(data => {
@@ -234,8 +235,8 @@
                         var hrtemp = document.createElement('DIV')
                         var hricon = document.createElement('IMG')
                         var hrhr = document.createElement('DIV')
-                        hour.setAttribute('onclick', 'divdata(' + i + ')')
-                        hour.setAttribute('id', 'hr' + i)
+                        hour.setAttribute('id', 'hr' + i);
+                        hour.setAttribute('onclick', 'divdata('+i+')')
                         hrhr.className = 'time'
                         hrhr.innerHTML = d.toLocaleTimeString().substring(0, d.toLocaleTimeString().length - 3)
                         hour.appendChild(hrhr)
