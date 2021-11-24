@@ -166,7 +166,8 @@
     <script>
         function divdata(index, data) {
             var div = document.getElementById('row3')
-            div.innerHTML = data.hourly[index].dt
+            div.innerHTML = data
+            console.log(data.hourly[index].dt)
             div.style.display = 'block'
             
         }
