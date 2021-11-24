@@ -238,7 +238,7 @@
                         var hricon = document.createElement('IMG')
                         var hrhr = document.createElement('DIV')
                         hour.setAttribute('id', 'hr' + i);
-                        hour.setAttribute('onclick', 'divdata('+i+','+data+')')
+                        hour.addEventListener('click', divdata(i, data))
                         hrhr.className = 'time'
                         hrhr.innerHTML = d.toLocaleTimeString().substring(0, d.toLocaleTimeString().length - 3)
                         hour.appendChild(hrhr)
