@@ -164,9 +164,11 @@
 
 <body onload="load();">
     <script>
-        function divdata(index) {
-            document.getElementById('row3').innerHTML = index
-            document.getElementById('row3').style.display = 'block'
+        function divdata(index, data) {
+            var div = document.getElementById('row3')
+            div.innerHTML = data.hourly[index].clouds
+            div.style.display = 'block'
+            
         }
         function lang() {
             fetch('lang.json').then(data => data.json()).then(data => {
@@ -236,7 +238,7 @@
                         var hricon = document.createElement('IMG')
                         var hrhr = document.createElement('DIV')
                         hour.setAttribute('id', 'hr' + i);
-                        hour.setAttribute('onclick', 'divdata('+i+')')
+                        hour.setAttribute('onclick', 'divdata('+i+','+data+')')
                         hrhr.className = 'time'
                         hrhr.innerHTML = d.toLocaleTimeString().substring(0, d.toLocaleTimeString().length - 3)
                         hour.appendChild(hrhr)
@@ -257,7 +259,7 @@
                         var dyhr = document.createElement('DIV')
                         console.log(d)
                         var today = new Date();
-                        var dd = String(today.getDate()).padStart(2, '0');
+                        var dd = today.getDate()
                         var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
                         var yyyy = today.getFullYear();
 
