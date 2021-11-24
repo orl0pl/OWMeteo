@@ -166,8 +166,7 @@
     <script>
         function divdata(index, data) {
             var div = document.getElementById('row3')
-            div.innerHTML = data
-            console.log(data)
+            div.innerHTML = data.hourly[index].pressure.toString()
             div.style.display = 'block'
             
         }
