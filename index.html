@@ -13,7 +13,10 @@
             width: 2vw;
             background-color: transparent;
         }
-
+        ::-webkit-scrollbar-track {
+            width: 2vw;
+            background-color: transparent;
+        }
         ::-webkit-scrollbar-thumb {
             background-color: #09f;
             border-radius: 2vw;
@@ -159,6 +162,26 @@
         .minibox .icon {
             filter: invert(1);
         }
+        input[type=search] {
+            width: 70vw;
+            color: #fff;
+            height: 5vh;
+            background-color: #09f;
+            border: none !important;
+            border-radius: 2vh 0vh 0vh 2vh;
+            font-family: 'Ubuntu', sans-serif;
+        }
+        button {
+            width: 20vw;
+            height: 5vh;
+            border: none !important;
+            background-color: #0ef;
+            font-family: 'Ubuntu', sans-serif;
+            border-radius: 0vh 2vh 2vh 0vh;
+        }
+        ::placeholder {
+            color: #fff;
+        }
     </style>
 </head>
 
@@ -168,7 +191,19 @@
             var div = document.getElementById('row3')
             div.innerHTML = data.hourly[index].pressure
             div.style.display = 'block'
-            
+        }
+        function city(){
+            var city = document.getElementById('search').value
+            fetch('http://api.openweathermap.org/geo/1.0/direct?q='+city+'&limit=1&appid=911062246487cff1d7ff93826a7e4078').then(data => data.json()).then(data => {
+                console.log(data)
+                var call = {
+                    "coords": {
+                        "latitude": data[0].lat,
+                        "longitude": data[0].lon
+                    }
+                }
+                pos(call)
+            })
         }
         function lang() {
             fetch('lang.json').then(data => data.json()).then(data => {
@@ -278,8 +313,6 @@
                         day.appendChild(dytemp)
                         document.getElementById('row4').appendChild(day)
                     }
-                    document.getElementById('hour').onclick = function() {
-                    }
                 });
         }
         function icons(icon, code) {
@@ -326,7 +359,7 @@
     </script>
     <div id="settings"><img src="lang.svg" onclick="setLang()"></div>
     <span id="welcome"></span><br>
-    <input type="search">
+    <input type="search" id="search" placeholder="Wyszukaj miasto, dzielnince"><button onclick="city()">Szukaj</button>
     <h3>Teraz</h3>
     <div id="row1">
         <div class="mediumbox" id="mediumbox1"><img id="icon" src="weather-icons-master\svg\wi-refresh.svg">
