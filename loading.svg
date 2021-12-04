@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" style="margin: auto; display: block; shape-rendering: auto; background: none;" width="280" height="250" preserveAspectRatio="xMidYMid">
+<style type="text/css">
+  text {
+    text-anchor: middle; font-size: 127px; opacity: 0;
+  }
+</style>
+<g style="transform-origin:140px 125px;transform:scale(1)">
+<g transform="translate(140,125)">
+  <g transform="translate(0,0)"><g class="path" style="opacity: 1; transform-origin: -62.1px -0.558807px; animation: 1s linear -0.44s infinite normal forwards running blink-a95c9ede-90de-407b-9a4a-12551d501ae1;"><path d="M24.00 12.70L14.10 12.70L14.10-97.79L24.00-97.79L24.00 12.70" fill="#979797" stroke="none" stroke-width="none" transform="translate(-81.15001249313354,41.9861962890625)" style="fill: rgb(151, 151, 151);"></path></g><g class="path" style="opacity: 1; transform-origin: 14.1px -0.558807px; animation: 1s linear -0.22s infinite normal forwards running blink-a95c9ede-90de-407b-9a4a-12551d501ae1;"><path d="M100.20 12.70L90.30 12.70L90.30-97.79L100.20-97.79L100.20 12.70" fill="#979797" stroke="none" stroke-width="none" transform="translate(-81.15001249313354,41.9861962890625)" style="fill: rgb(200, 200, 200);"></path></g><g class="path" style="opacity: 1; transform-origin: 90.3px -0.558807px; animation: 1s linear 0s infinite normal forwards running blink-a95c9ede-90de-407b-9a4a-12551d501ae1;"><path d="M176.40 12.70L166.50 12.70L166.50-97.79L176.40-97.79L176.40 12.70" fill="#979797" stroke="none" stroke-width="none" transform="translate(-81.15001249313354,41.9861962890625)" style="fill: rgb(151, 151, 151);"></path></g></g>
+</g>
+</g>
+<style id="blink-a95c9ede-90de-407b-9a4a-12551d501ae1" data-anikit="">@keyframes blink-a95c9ede-90de-407b-9a4a-12551d501ae1 {
+  0% { opacity: 1; }
+  49.75% { opacity: 1; }
+  50.25% { opacity: 0; }
+  99.5% { opacity: 0; }
+  100% { opacity: 1; }
+}</style></svg>
