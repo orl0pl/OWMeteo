@@ -25,7 +25,9 @@
 
         :root {
             --background: #fff;
-            --now-b: rgb(117, 117, 255);
+            --now-b: #09f;
+            --text: #000;
+
         }
 
         .darkmode {
@@ -35,8 +37,9 @@
 
         html {
             font-family: 'Ubuntu', sans-serif;
-            background-color: rgb(255, 255, 255);
+            background-color: var(--background);
             user-select: none;
+            color: var(--text);
         }
 
         #welcome {
@@ -46,7 +49,7 @@
         .minibox {
             width: 20vh;
             height: 28vh;
-            background-color: #09f;
+            background-color: var(--now-b);
             border-radius: 1vh;
             margin-left: 1vw;
             margin-right: 1vw;
@@ -57,7 +60,7 @@
         }
 
         .mediumbox {
-            width: 40vh;
+            width: 42vh;
             height: 20vh;
             background-color: var(--now-b);
             border-radius: 4px;
@@ -85,7 +88,7 @@
             overflow-x: auto;
             display: none;
             white-space: nowrap;
-            border-top: 1vh solid #09f;
+            border-top: 1vh solid var(--now-b);
         }
 
         #row4 {
@@ -107,7 +110,11 @@
 
         .minibox .time {
             background-color: var(--background);
+            margin: 0;
             text-align: center;
+            width: 50%;
+            position: relative;
+            left: 25%;
         }
 
         .icon {
@@ -167,7 +174,7 @@
             width: 70vw;
             color: #fff;
             height: 5vh;
-            background-color: #09f;
+            background-color: var(--now-b);
             border: none !important;
             border-radius: 2vh 0vh 0vh 2vh;
             font-family: 'Ubuntu', sans-serif;
@@ -188,6 +195,11 @@
 
 <body onload="load();">
     <script>
+        function dark() {
+            document.documentElement.style.setProperty('--background', '#000');
+            document.documentElement.style.setProperty('--now-b', '#048')
+            document.documentElement.style.setProperty('--text', '#fff')
+        }
         function divdata(index, data) {
             var div = document.getElementById('row3')
             div.innerHTML = data.hourly[index].pressure
@@ -257,6 +269,7 @@
         }*/
         function pos(pos) {
             document.getElementById('row2').innerHTML = ''
+            document.getElementById('row5').innerHTML = '<iframe src="https://embed.windy.com/embed2.html?lat='+pos.coords.latitude+'&amp;lon='+pos.coords.longitude+'&zoom=10" frameborder="0" width="100%" height="500vh"></iframe>'
             fetch('https://api.openweathermap.org/data/2.5/onecall?lat=' + pos.coords.latitude + '&lon=' + pos.coords.longitude + '&appid=' + '911062246487cff1d7ff93826a7e4078')
                 .then((response) => { return response.json(); })
                 .then((data) => {
@@ -305,7 +318,7 @@
                         today = dd + '/' + mm + '/' + yyyy;
                         dyhr.innerHTML = today;
                         dyhr.className = 'time'
-                        dyhr.innerHTML = d.getDay() + '.' + (d.getMonth() + 1)
+                        dyhr.innerHTML = (d.getDate()+1) + '.' + (d.getMonth() + 1)
                         day.appendChild(dyhr)
                         dyicon.setAttribute('src', icons(data.daily[n].weather[0].icon))
                         dyicon.className = 'icon'
