@@ -1,0 +1,180 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+
+        ::-webkit-scrollbar {
+            width: 2vw;
+            background-color: transparent;
+        }
+        ::-webkit-scrollbar-track {
+            width: 2vw;
+            background-color: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: #09f;
+            border-radius: 2vw;
+        }
+
+        :root {
+            --background: #fff;
+            --now-b: #09f;
+            --text: #000;
+
+        }
+
+        .darkmode {
+            background-color: #000;
+            color: #fff;
+        }
+
+        html {
+            font-family: 'Ubuntu', sans-serif;
+            background-color: var(--background);
+            user-select: none;
+            color: var(--text);
+        }
+
+        #welcome {
+            font-size: 10vh;
+        }
+
+        .minibox {
+            width: 20vh;
+            height: 28vh;
+            background-color: var(--now-b);
+            border-radius: 1vh;
+            margin-left: 1vw;
+            margin-right: 1vw;
+            margin-top: 1vh;
+            margin-bottom: 1vh;
+            display: inline-block;
+            border: 2px solid #ddd;
+        }
+
+        .mediumbox {
+            display: flexbox;
+            background-color: var(--now-b);
+            border-radius: 4px;
+            margin-left: 1vw;
+            margin-right: 1vw;
+            margin-top: 1vh;
+            margin-bottom: 1vh;
+            display: inline-block;
+            color: #fff;
+        }
+
+        #row1 {
+            overflow-x: auto;
+
+            white-space: nowrap;
+        }
+
+        #row2 {
+            overflow-x: auto;
+
+            white-space: nowrap;
+        }
+
+        #row3 {
+            overflow-x: auto;
+            display: none;
+            white-space: nowrap;
+            border-top: 1vh solid var(--now-b);
+        }
+
+        #row4 {
+            overflow-x: auto;
+
+            white-space: nowrap;
+        }
+
+        .minibox .content {
+            background-color: var(--background);
+            position: static;
+            bottom: 0px;
+            left: 0px;
+            width: 100%;
+            border-radius: 1vh;
+            font-size: 6vh;
+            text-align: center;
+        }
+
+        .minibox .time {
+            background-color: var(--background);
+            margin: 0;
+            text-align: center;
+            width: 50%;
+            position: relative;
+            left: 25%;
+            border-radius: 0vh 0vh 1vh 1vh;
+        }
+
+        .icon {
+            text-align: center;
+            width: 17vh;
+        }
+
+        .mediumbox #icon {
+            align-self: center;
+            height: 20vh;
+            display: inline-block;
+            margin-left: 0.01vw;
+            filter: invert(1);
+        }
+
+        svg {
+            filter: invert(0.5) sepia(1) saturate(5) hue-rotate(175deg)
+        }
+
+        .mediumbox #temp {
+            align-self: flex-start;
+            font-size: 9vh;
+            margin: 1vh;
+            display: inline;
+            color: #fff;
+        }
+
+        .mediumbox #time {
+            align-self: center;
+            display: inline-block;
+            position: relative;
+            left: -7vh;
+        }
+
+        #lang {
+            position: absolue;
+            right: 0px;
+        }
+
+        #windicon {
+            height: 7vh;
+            filter: invert(1)
+        }
+
+        #wind {
+            display: inline-block;
+            position: relative;
+            top: -10vh;
+        }
+
+        .minibox .icon {
+            filter: invert(1);
+        }
+        input[type=search] {
+            width: 70vw;
+            color: #fff;
+            height: 5vh;
+            background-color: var(--now-b);
+            border: none !important;
+            border-radius: 2vh 0vh 0vh 2vh;
+            font-family: 'Ubuntu', sans-serif;
+        }
+        button {
+            width: 20vw;
+            height: 5vh;
+            border: none !important;
+            background-color: #0ef;
+            font-family: 'Ubuntu', sans-serif;
+            border-radius: 0vh 2vh 2vh 0vh;
+        }
+        ::placeholder {
+            color: #fff;
+        }
