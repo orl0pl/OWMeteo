@@ -19,7 +19,10 @@ function pos(pos) {
                 var hricon = document.createElement('IMG')
                 var hrhr = document.createElement('DIV')
                 hour.setAttribute('id', 'hr' + i);
-                hour.setAttribute('onclick', 'divData("row3", '+data.hourly[i].dt+')')
+                hour.setAttribute('onclick', 'divData("row3", '+{
+                    'wind': data.hourly[i].wind_speed,
+                    'winddeg': data.hourly[i].wind_deg
+                }+')')
                 hrhr.className = 'time'
                 hrhr.innerHTML = d.toLocaleTimeString().substring(0, d.toLocaleTimeString().length - 3)
                 hour.appendChild(hrhr)
@@ -48,7 +51,7 @@ function pos(pos) {
                 today = dd + '/' + mm + '/' + yyyy;
                 dyhr.innerHTML = today;
                 dyhr.className = 'time'
-                dyhr.innerHTML = (d.getDate()+1) + '.' + (d.getMonth() + 1)
+                dyhr.innerHTML = (d.getDate()) + '.' + (d.getMonth() + 1)
                 day.appendChild(dyhr)
                 dyicon.setAttribute('src', icons(data.daily[n].weather[0].icon))
                 dyicon.className = 'icon'
@@ -103,8 +106,14 @@ function icons(icon, code) {
     }
 }
 function divData(div, data) {
-    console.log(data)
+    console.log(data.json())
     document.getElementById('row3').style.display = 'block';
-    document.getElementById('row3').innerText = data.toString()
-    document.getElementById('row3').scrollIntoView();
 }
+var map = L.map('map').setView([51.505, -0.09], 13);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+L.marker([51.5, -0.09]).addTo(map)
+    .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
+    .openPopup();

@@ -7,8 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <title>Document</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
     <link rel="stylesheet" href="style.css">
     <script src="render.js"></script>
+    
 </head>
 
 <body onload="load();">
@@ -64,7 +67,7 @@
         }
     </script>
     <div id="settings"><img src="lang.svg" onclick="setLang()"></div>
-    <span id="welcome"></span><br>
+    <img src="icon.png"id="welcome">
     <input type="search" id="search" placeholder="Wyszukaj miasto, dzielnince"><button onclick="city()">Szukaj</button>
     <h3>Teraz</h3>
     <div id="row1">
@@ -85,7 +88,7 @@
     <h3>Prognoza 7 dniowa</h3>
     <div id="row4"></div>
     <h4>Radar</h4>
-    <div id="row5"><iframe src="https://embed.windy.com/embed2.html?lat=50&lon=18" frameborder="0" width="100%" height="500vh" ></iframe></div>
+    <div id="row5"><div id="map"></div></div>
     <footer>Thanks for icons from erikflowers ❤</footer>
 </body>
 
