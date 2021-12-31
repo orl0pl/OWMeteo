@@ -54,21 +54,26 @@
 
         .mediumbox {
             display: flexbox;
-            background-color: var(--now-b);
+            background-color: #09f8;
             border-radius: 4px;
-            margin-left: 1vw;
-            margin-right: 1vw;
-            margin-top: 1vh;
-            margin-bottom: 1vh;
+            left: auto;
+            right: auto;
             display: inline-block;
             color: #fff;
             box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
         }
-
+        #row1 h1 {
+            color: #fff;
+            background-color: #09fa;
+            margin: 1vh 0vh 0vh 1vh;
+            display: block;
+            width: fit-content;
+        }
         #row1 {
             overflow-x: auto;
-
+            background-size: 100vw;
             white-space: nowrap;
+            background-image: url("wphoto/nodata.png");
         }
 
         #row2 {

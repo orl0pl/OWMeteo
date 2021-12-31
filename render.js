@@ -4,6 +4,7 @@ function pos(pos) {
         .then((response) => { return response.json(); })
         .then((data) => {
             document.getElementById('icon').setAttribute('src', icons(data.current.weather[0].icon))
+            document.getElementById('row1').style.backgroundImage = `url(${bg(data.current.weather[0].icon)})`
             console.log(data)
             console.log(data.daily[1])
             var now = new Date(data.current.dt * 1000);
@@ -19,10 +20,9 @@ function pos(pos) {
                 var hricon = document.createElement('IMG')
                 var hrhr = document.createElement('DIV')
                 hour.setAttribute('id', 'hr' + i);
-                hour.setAttribute('onclick', 'divData("row3", '+{
-                    'wind': data.hourly[i].wind_speed,
-                    'winddeg': data.hourly[i].wind_deg
-                }+')')
+                var x = document.createElement('DIV')
+                x.innerHTML = data.hourly[i].temp
+                document.getElementById("row3").appendChild(x)
                 hrhr.className = 'time'
                 hrhr.innerHTML = d.toLocaleTimeString().substring(0, d.toLocaleTimeString().length - 3)
                 hour.appendChild(hrhr)
@@ -105,15 +105,48 @@ function icons(icon, code) {
         return 'weather-icons-master/svg/wi-refresh.svg'
     }
 }
+function bg(icon, code) {
+    if (icon == '01d') {
+        return 'wphoto/few_clouds.png';
+    }
+    if (icon == '02d') {
+        return 'wphoto/scattered_clouds.png';
+    }
+    if (icon == '03d' || icon == '03n') {
+        return 'weather-icons-master/svg/wi-cloud.svg';
+    }
+    if (icon == '04d' || icon == '04n') {
+        return 'wphoto/broken_clouds.png';
+    }
+    if (icon == '09d' || icon == '09n') {
+        return 'wphoto/rain.png';
+    }
+    if (icon == '10d') {
+        return 'wphoto/rain.png';
+    }
+    if (icon == '11d' || icon == '11n') {
+        return 'wphoto/thunderstorm.png';
+    }
+    if (icon == '13d' || icon == '13n') {
+        return 'wphoto/snowing.png';
+    }
+    if (icon == '50d' || icon == '50n') {
+        return 'wphoto/mist.png';
+    }
+    if (icon == '01n') {
+        return 'wphoto/few_night.png';
+    }
+    if (icon == '02n') {
+        return 'wphoto/night_clouds';
+    }
+    if (icon == '10n') {
+        return 'wphoto/rain.png';
+    }
+    else {
+        return 'wphoto/nodata.png'
+    }
+}
 function divData(div, data) {
     console.log(data.json())
     document.getElementById('row3').style.display = 'block';
 }
-var map = L.map('map').setView([51.505, -0.09], 13);
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(map);
-
-L.marker([51.5, -0.09]).addTo(map)
-    .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
-    .openPopup();
