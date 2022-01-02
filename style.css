@@ -1,18 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
 
-        ::-webkit-scrollbar {
-            width: 2vw;
-            background-color: transparent;
-        }
-        ::-webkit-scrollbar-track {
-            width: 2vw;
-            background-color: transparent;
-        }
-        ::-webkit-scrollbar-thumb {
-            background-color: #09f;
-            border-radius: 2vw;
-        }
-
         :root {
             --background: #fff;
             --now-b: #09f;
@@ -51,7 +38,9 @@
             border: 2px solid #ddd;
             box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
         }
-
+        #row2 .minibox:last-of-type {
+            margin-right: 0vw;
+        }
         .mediumbox {
             display: flexbox;
             background-color: #09f8;
@@ -78,7 +67,7 @@
 
         #row2 {
             overflow-x: auto;
-
+            width: 100vw;
             white-space: nowrap;
         }
 
