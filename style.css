@@ -28,7 +28,7 @@
         .minibox {
             width: 20vh;
             height: 28vh;
-            background-color: var(--now-b);
+            background-color: var(--background);
             border-radius: 1vh;
             margin-left: 1vw;
             margin-right: 1vw;
@@ -86,28 +86,32 @@
 
         .minibox .content {
             background-color: var(--background);
-            position: static;
-            bottom: 0px;
-            left: 0px;
-            width: 100%;
-            border-radius: 1vh;
+            color: var(--text);
+            width: min-content;
             font-size: 6vh;
             text-align: center;
+            border-top: 0.1vh solid var(--now-b); 
+            margin: 0% auto 0% auto;
         }
 
         .minibox .time {
             background-color: var(--background);
+            color: var(--text);
             margin: 0;
             text-align: center;
             width: 50%;
             position: relative;
             left: 25%;
+            border: 0.2vw solid var(--now-b);
+            border-top: 0vh solid #fff; 
             border-radius: 0vh 0vh 1vh 1vh;
         }
 
         .icon {
             text-align: center;
+            margin: 0 1.5vh;
             width: 17vh;
+            filter: invert(46%) sepia(82%) saturate(3527%) hue-rotate(183deg) brightness(103%) contrast(104%);
         }
 
         .mediumbox #icon {
@@ -118,9 +122,6 @@
             filter: invert(1);
         }
 
-        svg {
-            filter: invert(0.5) sepia(1) saturate(5) hue-rotate(175deg)
-        }
 
         .mediumbox #temp {
             align-self: flex-start;
@@ -154,7 +155,7 @@
         }
 
         .minibox .icon {
-            filter: invert(1);
+            filter: invert(46%) sepia(82%) saturate(3527%) hue-rotate(183deg) brightness(103%) contrast(104%);
         }
         input[type=search] {
             width: 70vw;
@@ -176,4 +177,14 @@
         ::placeholder {
             color: #fff;
         }
-        #map { height: 180px; }
+        #map { height: 40vh; }
+        #selector div{
+            display: inline-block;
+            background-color: #24e;
+            color: #fff;
+            padding: 5px;
+            border: 0.1vw solid #eee;
+        }
+        #selector div:hover{
+            background-color: #09f;
+        }

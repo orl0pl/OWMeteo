@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,17 +10,13 @@
     <meta name="title" content="OWMeteo - Pogoda">
     <meta name="description" content="Pogoda na każdą lokalizacje. Prognoza na 48 godzin i 7 dni.">
     <meta name="keywords" content="pogoda, pogoda dzisiaj, kiedy będzie padać, pogoda jutro">
-    <meta name="robots" content="noindex, follow">
+    <meta name="robots" content="index, follow">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="language" content="English">
 
     <title>Document</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-        crossorigin="" />
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-        crossorigin=""></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
     <link rel="stylesheet" href="style.css">
     <script src="render.js"></script>
 
@@ -66,12 +63,15 @@
             }
         }
         function load() {
+            
             document.getElementById('row2').innerHTML = '<img src="loading.svg">' + 'Lokalizowanie...'
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(pos);
             }
+            else {
+                document.getElementById('city').innerText = 'Lokalizacja jest niedostępna. Proszę wyszukać miasto.'
+            }
             lang()
-
         }
         function toC(temp) {
             return Math.round((temp - 273.15)) + 'º';
@@ -84,12 +84,12 @@
     <div id="row1">
         <h1 id="city">Miasto</h1>
         <div class="mediumbox" id="mediumbox1"><img id="icon" src="weather-icons-master\svg\wi-refresh.svg">
-            <div id="temp">1</div>
+            <div id="temp">-</div>
             <div id="wind">
-                <div id="windspeed">2.6m/s</div>
+                <div id="windspeed">-m/s</div>
                 <img id="windicon" src="weather-icons-master/svg/wi-wind-deg.svg">
             </div>
-            <div id="time">22:22</div>
+            <div id="time">--:--</div>
         </div>
 
     </div>
@@ -101,6 +101,7 @@
     <div id="row4"></div>
     <h4>Radar</h4>
     <div id="row5">
+        <div id="selector"><div id="c">⛅</div><div id="r">🌧</div><div id="w">💨</div><div id="t">🌡</div><div id="n">🌦</div></div>
         <div id="map"></div>
     </div>
     <footer>Thanks for icons from erikflowers ❤</footer>

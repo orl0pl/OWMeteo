@@ -1,5 +1,88 @@
+
+function toogleMap(layer, status, map){
+    map.setLayoutProperty(layer, 'visibility', status);
+}
 function pos(pos) {
     document.getElementById('row2').innerHTML = ''
+    mapboxgl.accessToken = 'pk.eyJ1Ijoia3ViYXByb2ciLCJhIjoiY2tvaGRuNmcwMTUwdzJzb2Ezc2M4bzI3MiJ9.ZK0lAgyNVVkOAdsBSuqGAQ';
+
+    var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/kubaprog/ckyokd37z2sg214o4rzsuv8jz',
+    zoom: 9,
+    });
+
+    map.on('load', function () {
+        map.flyTo({center: [pos.coords.longitude, pos.coords.latitude]})
+        map.addLayer({
+            "id": "clouds",
+            "type": "raster",
+            "source": {
+                "type": "raster",
+                "tiles": ["https://tile.openweathermap.org/map/clouds_new/{z}/{x}/{y}.png?appid=692ca78196d8a5d923f16a3216092f76"],
+                "tileSize": 256
+            },
+            "minzoom": 0,
+        });
+        map.addLayer({
+            "id": "precipitation",
+            "type": "raster",
+            "source": {
+                "type": "raster",
+                "tiles": ["https://tile.openweathermap.org/map/precipitation_new/{z}/{x}/{y}.png?appid=692ca78196d8a5d923f16a3216092f76"],
+                "tileSize": 256
+            },
+            "minzoom": 0,
+        });
+        map.addLayer({
+            "id": "wind",
+            "type": "raster",
+            "source": {
+                "type": "raster",
+                "tiles": ["https://tile.openweathermap.org/map/wind_new/{z}/{x}/{y}.png?appid=692ca78196d8a5d923f16a3216092f76"],
+                "tileSize": 256
+            },
+            "minzoom": 0,
+        });
+        map.addLayer({
+            "id": "temp",
+            "type": "raster",
+            "source": {
+                "type": "raster",
+                "tiles": ["https://tile.openweathermap.org/map/temp_new/{z}/{x}/{y}.png?appid=692ca78196d8a5d923f16a3216092f76"],
+                "tileSize": 256
+            },
+            "minzoom": 0,
+        });
+        document.getElementById('c').onclick = function() {toogleMap('clouds', 'visible', map);
+        toogleMap('precipitation', 'none', map);
+        toogleMap('wind', 'none', map);
+        toogleMap('temp', 'none', map);
+        }
+        document.getElementById('r').onclick = function() {toogleMap('clouds', 'none', map);
+        toogleMap('precipitation', 'visible', map);
+        toogleMap('wind', 'none', map);
+        toogleMap('temp', 'none', map);
+        }
+        document.getElementById('w').onclick = function() {toogleMap('clouds', 'none', map);
+        toogleMap('precipitation', 'none', map);
+        toogleMap('wind', 'visible', map);
+        toogleMap('temp', 'none', map);
+        }
+        document.getElementById('t').onclick = function() {toogleMap('clouds', 'none', map);
+        toogleMap('precipitation', 'none', map);
+        toogleMap('wind', 'none', map);
+        toogleMap('temp', 'visible', map);
+        }
+        document.getElementById('n').onclick = function() {toogleMap('clouds', 'visible', map);
+        toogleMap('precipitation', 'visible', map);
+        toogleMap('wind', 'none', map);
+        toogleMap('temp', 'none', map);
+        }
+        const nav = new mapboxgl.NavigationControl();
+        map.addControl(nav, 'bottom-left');
+    });
+
     fetch('https://api.openweathermap.org/data/2.5/onecall?lat=' + pos.coords.latitude + '&lon=' + pos.coords.longitude + '&appid=' + '911062246487cff1d7ff93826a7e4078')
         .then((response) => { return response.json(); })
         .then((data) => {
@@ -34,7 +117,7 @@ function pos(pos) {
                 hour.className = 'minibox'
                 hour.appendChild(hrtemp)
                 document.getElementById('row2').appendChild(hour)
-                
+
             }
             for (n = 0; n < 7; n++) {
                 var d = new Date(data.daily[n].dt * 1000);
@@ -137,7 +220,7 @@ function bg(icon, code) {
         return 'wphoto/few_night.png';
     }
     if (icon == '02n') {
-        return 'wphoto/night_clouds';
+        return 'wphoto/night_clouds.png';
     }
     if (icon == '10n') {
         return 'wphoto/rain.png';
