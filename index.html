@@ -31,77 +31,67 @@
         }
         function city() {
             var city = document.getElementById('search').value
+            if(city.length == 0) return
             fetch('http://api.openweathermap.org/geo/1.0/direct?q=' + city + '&limit=1&appid=911062246487cff1d7ff93826a7e4078').then(data => data.json()).then(data => {
                 console.log(data)
+                if(data.length == 0) return
                 var call = {
                     "coords": {
                         "latitude": data[0].lat,
                         "longitude": data[0].lon
                     }
                 }
+                document.getElementById('city').innerHTML = city;
                 pos(call)
             })
         }
-        function lang() {
-            fetch('lang.json').then(data => data.json()).then(data => {
-                console.log(data)
-                var savedLang = localStorage.getItem('lang');
-                if (savedLang !== 'pl' || savedLang !== 'en') {
-                    localStorage.setItem('lang', 'en');
-                }
-                document.getElementById('welcome').innerHTML = data[savedLang].title
-            })
-        }
-        function setLang() {
-            if (localStorage.getItem('lang') == 'pl') {
-                localStorage.setItem('lang', 'en');
-                lang()
-            }
-            if (localStorage.getItem('lang') == 'en') {
-                localStorage.setItem('lang', 'pl');
-                lang()
-            }
-        }
         function load() {
-            
-            document.getElementById('row2').innerHTML = '<img src="loading.svg">' + 'Lokalizowanie...'
+
+            document.getElementById('loca').innerHTML = '<img src="loading.svg">' + 'Lokalizowanie...'
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(pos);
             }
             else {
                 document.getElementById('city').innerText = 'Lokalizacja jest niedostępna. Proszę wyszukać miasto.'
             }
-            lang()
         }
         function toC(temp) {
             return Math.round((temp - 273.15)) + 'º';
         }
     </script>
-    <div id="settings"><img src="lang.svg" onclick="setLang()"></div>
-    <img src="icon.png" id="welcome">
-    <input type="search" id="search" placeholder="Wyszukaj miasto, dzielnince"><button onclick="city()">Szukaj</button>
-    <h3>Teraz</h3>
-    <div id="row1">
-        <h1 id="city">Miasto</h1>
-        <div class="mediumbox" id="mediumbox1"><img id="icon" src="weather-icons-master\svg\wi-refresh.svg">
-            <div id="temp">-</div>
-            <div id="wind">
-                <div id="windspeed">-m/s</div>
-                <img id="windicon" src="weather-icons-master/svg/wi-wind-deg.svg">
+    <div id="topcon" style="background-repeat: no-repeat; background-size: cover;">
+        <input type="search" id="search" placeholder="Wyszukaj miasto, dzielnince" class="blueglass"><button
+            onclick="city()">Szukaj</button>
+        <h3 class="blueglass">Teraz</h3>
+        <div id="row1">
+            <h1 class="blueglass" id="city">Miasto</h1>
+            <div class="mediumbox blueglass" id="mediumbox1"><img id="icon"
+                    src="weather-icons-master\svg\wi-refresh.svg">
+                <div id="temp">-</div>
+                <div id="wind">
+                    <div id="windspeed">-m/s</div>
+                    <img id="windicon" src="weather-icons-master/svg/wi-wind-deg.svg">
+                </div>
+                <div id="time">--:--</div>
             </div>
-            <div id="time">--:--</div>
-        </div>
 
-    </div>
-    <h3>Prognoza godzinowa</h3>
-    <div id="row2">
+        </div>
+        <h3>Prognoza godzinowa</h3>
+        <div id="row2"><div id="loca"></div>
+        </div>
     </div>
     <div id="row3">opis</div>
     <h3>Prognoza 7 dniowa</h3>
     <div id="row4"></div>
     <h4>Radar</h4>
     <div id="row5">
-        <div id="selector"><div id="c">⛅</div><div id="r">🌧</div><div id="w">💨</div><div id="t">🌡</div><div id="n">🌦</div></div>
+        <div id="selector">
+            <div id="c">⛅</div>
+            <div id="r">🌧</div>
+            <div id="w">💨</div>
+            <div id="t">🌡</div>
+            <div id="n">🌦</div>
+        </div>
         <div id="map"></div>
     </div>
     <footer>Thanks for icons from erikflowers ❤</footer>

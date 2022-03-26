@@ -3,6 +3,7 @@ function toogleMap(layer, status, map){
     map.setLayoutProperty(layer, 'visibility', status);
 }
 function pos(pos) {
+    document.getElementById('loca').innerHTML = ''
     document.getElementById('row2').innerHTML = ''
     mapboxgl.accessToken = 'pk.eyJ1Ijoia3ViYXByb2ciLCJhIjoiY2tvaGRuNmcwMTUwdzJzb2Ezc2M4bzI3MiJ9.ZK0lAgyNVVkOAdsBSuqGAQ';
 
@@ -10,10 +11,10 @@ function pos(pos) {
     container: 'map',
     style: 'mapbox://styles/kubaprog/ckyokd37z2sg214o4rzsuv8jz',
     zoom: 9,
+    center: [pos.coords.longitude, pos.coords.latitude]
     });
 
     map.on('load', function () {
-        map.flyTo({center: [pos.coords.longitude, pos.coords.latitude]})
         map.addLayer({
             "id": "clouds",
             "type": "raster",
@@ -82,12 +83,11 @@ function pos(pos) {
         const nav = new mapboxgl.NavigationControl();
         map.addControl(nav, 'bottom-left');
     });
-
     fetch('https://api.openweathermap.org/data/2.5/onecall?lat=' + pos.coords.latitude + '&lon=' + pos.coords.longitude + '&appid=' + '911062246487cff1d7ff93826a7e4078')
         .then((response) => { return response.json(); })
         .then((data) => {
             document.getElementById('icon').setAttribute('src', icons(data.current.weather[0].icon))
-            document.getElementById('row1').style.backgroundImage = `url(${bg(data.current.weather[0].icon)})`
+            document.getElementById('topcon').style.backgroundImage = `url(${bg(data.current.weather[0].icon)})`
             console.log(data)
             console.log(data.daily[1])
             var now = new Date(data.current.dt * 1000);

@@ -1,29 +1,51 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
-
+@media (hover: none) and (pointer: coarse) {
+    body {
+        font-size: 16px;
+    }
+    .minibox {
+        width: 200px;
+        height: 300px;
+        background-color: var(--background);
+        border-radius: 1vh;
+        margin-left: 1vw;
+        margin-right: 1vw;
+        margin-top: 1vh;
+        margin-bottom: 1vh;
+        display: inline-block;
+        border: 2px solid #ddd;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+}
+        .blueglass {
+            background-color: #09f1 !important;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(3.8px);
+        }
+        h3 { 
+            margin: 8px 0px 0px 8px;
+        }
+        #topcon h3{
+            color: #fff;
+            background-color: #09f1;
+            padding: 0.5vh;
+            border-radius: 0.5vh;
+            width: min-content;
+        }
+        body {
+            margin: 0px;
+        }
         :root {
             --background: #fff;
             --now-b: #09f;
             --text: #000;
 
         }
-
-        .darkmode {
-            background-color: #000;
-            color: #fff;
-        }
-
         html {
             font-family: 'Ubuntu', sans-serif;
             background-color: var(--background);
             user-select: none;
             color: var(--text);
-        }
-
-        #welcome{
-            margin-left: auto;
-            margin-right: auto;
-            height: 10vh;
-            display: block;
         }
         .minibox {
             width: 20vh;
@@ -37,9 +59,6 @@
             display: inline-block;
             border: 2px solid #ddd;
             box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-        }
-        #row2 .minibox:last-of-type {
-            margin-right: 0vw;
         }
         .mediumbox {
             display: flexbox;
@@ -59,16 +78,17 @@
             width: fit-content;
         }
         #row1 {
+            margin: 8px 0px 0px 8px;
             overflow-x: auto;
             background-size: 100vw;
             white-space: nowrap;
-            background-image: url("wphoto/nodata.png");
+            /*background-image: linear-gradient(to bottom, #fff0, #ffff);*/
         }
 
         #row2 {
             overflow-x: auto;
-            width: 100vw;
             white-space: nowrap;
+            background-image: linear-gradient(to bottom, #fff0, #ffff);
         }
 
         #row3 {
@@ -111,7 +131,6 @@
             text-align: center;
             margin: 0 1.5vh;
             width: 17vh;
-            filter: invert(46%) sepia(82%) saturate(3527%) hue-rotate(183deg) brightness(103%) contrast(104%);
         }
 
         .mediumbox #icon {
@@ -158,6 +177,7 @@
             filter: invert(46%) sepia(82%) saturate(3527%) hue-rotate(183deg) brightness(103%) contrast(104%);
         }
         input[type=search] {
+            margin: 8px 0px 0px 8px;
             width: 70vw;
             color: #fff;
             height: 5vh;
