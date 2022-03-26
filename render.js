@@ -86,13 +86,11 @@ function pos(pos) {
     fetch('https://api.openweathermap.org/data/2.5/onecall?lat=' + pos.coords.latitude + '&lon=' + pos.coords.longitude + '&appid=' + '911062246487cff1d7ff93826a7e4078')
         .then((response) => { return response.json(); })
         .then((data) => {
-            document.getElementById('icon').setAttribute('src', icons(data.current.weather[0].icon))
             document.getElementById('topcon').style.backgroundImage = `url(${bg(data.current.weather[0].icon)})`
             console.log(data)
             console.log(data.daily[1])
             var now = new Date(data.current.dt * 1000);
             document.getElementById('temp').innerHTML = Math.round((data.current.temp - 273.15)) + 'º';
-            document.getElementById('time').innerHTML = now.toLocaleTimeString().substring(0, now.toLocaleTimeString().length - 3)
             document.getElementById('windicon').style.transform = 'rotate(' + data.current.wind_deg + 'deg)';
             document.getElementById('windspeed').innerHTML = (Math.round(data.current.wind_speed * 10) / 10) + 'm/s'
             //rain(data)

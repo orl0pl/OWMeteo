@@ -1,4 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+@font-face {
+    font-family: 'weathericons';
+    src: url(weather-icons-master/font/weathericons-regular-webfont.ttf);
+}
+.iw{
+    font-family: 'weathericons';
+    color: #09f;
+}
 @media (hover: none) and (pointer: coarse) {
     body {
         font-size: 16px;
@@ -17,6 +25,21 @@
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     }
 }
+        #rain { 
+            display: inline;
+        }
+        #bar { 
+            display: inline;
+        }
+        ul {
+            margin-block: 0;
+            margin-inline: 0;
+            padding-inline: 0;
+            height: 10vh;
+            display: inline-block;
+            vertical-align: super;
+            list-style: none;
+        }
         .blueglass {
             background-color: #09f1 !important;
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -62,6 +85,7 @@
         }
         .mediumbox {
             display: flexbox;
+            width: 50vw;
             background-color: #09f8;
             border-radius: 4px;
             left: auto;
@@ -143,10 +167,9 @@
 
 
         .mediumbox #temp {
-            align-self: flex-start;
             font-size: 9vh;
             margin: 1vh;
-            display: inline;
+            display: inline-block;
             color: #fff;
         }
 
@@ -170,7 +193,7 @@
         #wind {
             display: inline-block;
             position: relative;
-            top: -10vh;
+            left: 40vh;
         }
 
         .minibox .icon {
