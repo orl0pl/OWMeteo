@@ -1,4 +1,4 @@
-
+function checkTime(i) {if (i < 10) {i = "0" + i;}return i;}
 function toogleMap(layer, status, map){
     map.setLayoutProperty(layer, 'visibility', status);
 }
@@ -85,7 +85,12 @@ function pos(pos) {
     });
     fetch('https://api.openweathermap.org/data/2.5/onecall?lat=' + pos.coords.latitude + '&lon=' + pos.coords.longitude + '&appid=' + '911062246487cff1d7ff93826a7e4078')
         .then((response) => { return response.json(); })
+        
         .then((data) => {
+            var apidata = data;
+            console.log('DATA:')
+            console.log(data)
+            console.log('----')
             document.getElementById('topcon').style.backgroundImage = `url(${bg(data.current.weather[0].icon)})`
             console.log(data)
             console.log(data.daily[1])
@@ -101,9 +106,6 @@ function pos(pos) {
                 var hricon = document.createElement('IMG')
                 var hrhr = document.createElement('DIV')
                 hour.setAttribute('id', 'hr' + i);
-                var x = document.createElement('DIV')
-                x.innerHTML = data.hourly[i].temp
-                document.getElementById("row3").appendChild(x)
                 hrhr.className = 'time'
                 hrhr.innerHTML = d.toLocaleTimeString().substring(0, d.toLocaleTimeString().length - 3)
                 hour.appendChild(hrhr)
@@ -112,11 +114,27 @@ function pos(pos) {
                 hour.appendChild(hricon)
                 hrtemp.innerHTML = toC(data.hourly[i].temp);
                 hrtemp.className = 'content'
-                hour.className = 'minibox'
+                hour.className = 'minibox hour'
+                hour.setAttribute('data', JSON.stringify(data.hourly[i]))
                 hour.appendChild(hrtemp)
                 document.getElementById('row2').appendChild(hour)
-
+                hour.onclick = function (e) {
+                    var ev;
+                    if(e.target.parentElement.id == 'row2') {ev = e.target}
+                    if(e.target.parentElement.className == 'minibox hour') {ev = e.target.parentElement}
+                    var hrdt = JSON.parse(ev.getAttribute('data'))
+                    var timehr = new Date(hrdt.dt * 1000)
+                    document.getElementById('hrpop').innerHTML = ` ${hrdt.pop * 100} % - ${hrdt.rain['1h']} mm`
+                    document.getElementById('hrpres').innerHTML = ` ${hrdt.pressure} hPa`
+                    document.getElementById('hrhr').innerHTML = ` ${checkTime(timehr.getHours())}:${checkTime(timehr.getMinutes())}`
+                    document.getElementById('hrfl').innerHTML = ` ${toC(hrdt.feels_like)}`
+                    document.getElementById('hrhum').innerHTML = ` ${hrdt.humidity}%`
+                    document.getElementById('hrwindicon').style.transform = 'rotate(' + hrdt.wind_deg + 'deg)';
+                    document.getElementById('hrwindspeed').innerHTML = (Math.round(hrdt.wind_speed * 10) / 10) + 'm/s'
+                    console.log(hrdt)
+                }
             }
+            document.getElementById('hr1').click();
             for (n = 0; n < 7; n++) {
                 var d = new Date(data.daily[n].dt * 1000);
                 var day = document.createElement('DIV')
@@ -143,7 +161,13 @@ function pos(pos) {
                 day.appendChild(dytemp)
                 document.getElementById('row4').appendChild(day)
             }
+            console.log(JSON.parse(document.getElementsByClassName('hour')[0].getAttribute('data')))
+        })
+        .then(data => {
+            apidata = data;
         });
+        
+        
 }
 function icons(icon, code) {
     if (icon == '01d') {
@@ -194,7 +218,7 @@ function bg(icon, code) {
         return 'wphoto/scattered_clouds.png';
     }
     if (icon == '03d' || icon == '03n') {
-        return 'weather-icons-master/svg/wi-cloud.svg';
+        return 'wphoto/clouds.png';
     }
     if (icon == '04d' || icon == '04n') {
         return 'wphoto/broken_clouds.png';
@@ -226,8 +250,4 @@ function bg(icon, code) {
     else {
         return 'wphoto/nodata.png'
     }
-}
-function divData(div, data) {
-    console.log(data.json())
-    document.getElementById('row3').style.display = 'block';
 }
