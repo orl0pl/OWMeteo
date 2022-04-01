@@ -147,6 +147,7 @@ function pos(pos) {
                 var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
                 var yyyy = today.getFullYear();
 
+                day.setAttribute('data', JSON.stringify(data.daily[n]));
                 today = dd + '/' + mm + '/' + yyyy;
                 dyhr.innerHTML = today;
                 dyhr.className = 'time'
@@ -157,9 +158,14 @@ function pos(pos) {
                 day.appendChild(dyicon)
                 dytemp.innerHTML = toC(data.daily[n].temp.day) + '|' + toC(data.daily[n].temp.night);
                 dytemp.className = 'content'
-                day.className = 'minibox'
+                day.className = 'minibox day'
                 day.appendChild(dytemp)
                 document.getElementById('row4').appendChild(day)
+                day.onclick = function (e) {
+                    var dydt = JSON.parse(e.currentTarget.getAttribute('data'))
+                    //document.getElementById('row6').innerHTML = JSON.stringify(dydt)
+                    console.log(dydt)
+                }
             }
             console.log(JSON.parse(document.getElementsByClassName('hour')[0].getAttribute('data')))
         })

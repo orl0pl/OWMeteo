@@ -118,7 +118,11 @@
             white-space: nowrap;
             border-top: 0.5vh solid var(--now-b);
         }
-
+        #row6 {
+            overflow-x: auto;
+            white-space: nowrap;
+            border-top: 0.5vh solid var(--now-b);
+        }
         #row4 {
             overflow-x: auto;
 
