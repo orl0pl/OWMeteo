@@ -31,10 +31,10 @@
         }
         function city() {
             var city = document.getElementById('search').value
-            if(city.length == 0) return
+            if (city.length == 0) return
             fetch('http://api.openweathermap.org/geo/1.0/direct?q=' + city + '&limit=1&appid=911062246487cff1d7ff93826a7e4078').then(data => data.json()).then(data => {
                 console.log(data)
-                if(data.length == 0) return
+                if (data.length == 0) return
                 var call = {
                     "coords": {
                         "latitude": data[0].lat,
@@ -64,11 +64,13 @@
             onclick="city()">Szukaj</button>
         <h3 class="blueglass">Teraz</h3>
         <div id="row1">
-            <h1 class="blueglass" id="city">Miasto</h1>
+            <h1 class="blueglass" id="city">Twoja Lokalizacja</h1>
             <div class="mediumbox blueglass" id="mediumbox1">
                 <div id="temp">-</div>
-                <ul><li></li></ul>
-                
+                <ul>
+                    <li></li>
+                </ul>
+
                 <div id="wind">
                     <div id="windspeed">-m/s</div>
                     <img id="windicon" src="weather-icons-master/svg/wi-wind-deg.svg">
@@ -77,15 +79,17 @@
 
         </div>
         <h3>Prognoza godzinowa</h3>
-        <div id="row2"><div id="loca"></div>
+        <div id="row2">
+            <div id="loca"> ... </div>
         </div>
+    </div>
     </div>
     <div id="row3" style="margin-left: 30px"><span id="hrhr" style="font-size: 200%;">12:00</span><br>
         <ul>
-        <li><span class="iw"></span><span id="hrpop"> --%</span></li>
-        <li><span class="iw"></span><span id="hrpres"> --hPa</span></li>
-        <li><span class="iw"></span><span id="hrhum"> --%</span></li>
-        <li><span class="iw"></span><span id="hrfl"> --°</span></li>
+            <li><span id="hrpop"> --%</span></li>
+            <li><span class="iw"></span><span id="hrpres"> --hPa</span></li>
+            <li><span class="iw"></span><span id="hrhum"> --%</span></li>
+            <li><span class="iw"></span><span id="hrfl"> --°</span></li>
         </ul>
         <div id="hrwind">
             <div id="hrwindspeed">-m/s</div>
@@ -95,7 +99,36 @@
     <h3>Prognoza 7 dniowa</h3>
     <div id="row4"></div>
     <div id="row6">
-        
+        <span id="dyhr" style="font-size: 200%;">12:00</span><br>
+            <ul>
+                <li><span id="dypop"> --%</span></li>
+                <li><span class="iw"></span><span id="dypres"> --hPa</span></li>
+                <li><span class="iw"></span><span id="dyhum"> --%</span></li>
+                <li><span class="iw"></span><span id="dysr"> --:--</span></li>
+                <li><span class="iw"></span><span id="dyss"> --:--</span></li>
+
+            </ul>
+            <div id="dywind">
+                <div id="dywindspeed">-m/s</div>
+                <img id="dywindicon" src="weather-icons-master/svg/wi-wind-deg.svg">
+            </div>
+            <br>
+            <div class="microbox">
+                <span class="microtime">Rano</span> <div class="microtemp" id="1dytemp">--°</div>
+                <div class="microfl" id="1dyfl">--°</div><br>
+            </div>
+            <div class="microbox">
+                <span class="microtime">Popołudnie</span> <div class="microtemp" id="2dytemp">--°</div>
+                <div class="microfl" id="2dyfl">--°</div><br>
+            </div>
+            <div class="microbox">
+                <span class="microtime">Wieczór</span> <div class="microtemp" id="3dytemp">--°</div>
+                <div class="microfl" id="3dyfl">--°</div><br>
+            </div>
+            <div class="microbox">
+                <span class="microtime">Noc</span> <div class="microtemp" id="4dytemp">--°</div>
+                <div class="microfl" id="4dyfl">--°</div><br>
+            </div>
     </div>
     <h4>Radar</h4>
     <div id="row5">
@@ -108,7 +141,7 @@
         </div>
         <div id="map"></div>
     </div>
-    <footer>Thanks for icons from erikflowers ❤</footer>
+    <footer>Thanks for icons from erikflowers ❤ | 3.4.22 relase</footer>
 </body>
 
 </html>

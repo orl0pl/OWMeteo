@@ -3,8 +3,6 @@ function toogleMap(layer, status, map){
     map.setLayoutProperty(layer, 'visibility', status);
 }
 function pos(pos) {
-    document.getElementById('loca').innerHTML = ''
-    document.getElementById('row2').innerHTML = ''
     mapboxgl.accessToken = 'pk.eyJ1Ijoia3ViYXByb2ciLCJhIjoiY2tvaGRuNmcwMTUwdzJzb2Ezc2M4bzI3MiJ9.ZK0lAgyNVVkOAdsBSuqGAQ';
 
     var map = new mapboxgl.Map({
@@ -13,7 +11,9 @@ function pos(pos) {
     zoom: 9,
     center: [pos.coords.longitude, pos.coords.latitude]
     });
-
+    var maker = new mapboxgl.Marker()
+    .setLngLat([pos.coords.longitude, pos.coords.latitude])
+    .addTo(map);
     map.on('load', function () {
         map.addLayer({
             "id": "clouds",
@@ -85,21 +85,16 @@ function pos(pos) {
     });
     fetch('https://api.openweathermap.org/data/2.5/onecall?lat=' + pos.coords.latitude + '&lon=' + pos.coords.longitude + '&appid=' + '911062246487cff1d7ff93826a7e4078')
         .then((response) => { return response.json(); })
-        
         .then((data) => {
-            var apidata = data;
-            console.log('DATA:')
-            console.log(data)
-            console.log('----')
+            document.getElementById('row2').innerHTML = ' '
             document.getElementById('topcon').style.backgroundImage = `url(${bg(data.current.weather[0].icon)})`
             console.log(data)
-            console.log(data.daily[1])
             var now = new Date(data.current.dt * 1000);
             document.getElementById('temp').innerHTML = Math.round((data.current.temp - 273.15)) + 'º';
             document.getElementById('windicon').style.transform = 'rotate(' + data.current.wind_deg + 'deg)';
             document.getElementById('windspeed').innerHTML = (Math.round(data.current.wind_speed * 10) / 10) + 'm/s'
             //rain(data)
-            for (i = 1; i < Object.keys(data.hourly).length - 1; i++) {
+            for (i = 0; i < Object.keys(data.hourly).length; i++) {
                 var d = new Date(data.hourly[i].dt * 1000);
                 var hour = document.createElement('DIV')
                 var hrtemp = document.createElement('DIV')
@@ -119,12 +114,18 @@ function pos(pos) {
                 hour.appendChild(hrtemp)
                 document.getElementById('row2').appendChild(hour)
                 hour.onclick = function (e) {
-                    var ev;
-                    if(e.target.parentElement.id == 'row2') {ev = e.target}
-                    if(e.target.parentElement.className == 'minibox hour') {ev = e.target.parentElement}
-                    var hrdt = JSON.parse(ev.getAttribute('data'))
+                    var hrdt = JSON.parse(e.currentTarget.getAttribute('data'))
                     var timehr = new Date(hrdt.dt * 1000)
-                    document.getElementById('hrpop').innerHTML = ` ${hrdt.pop * 100} % - ${hrdt.rain['1h']} mm`
+                    if(!hrdt.rain && hrdt.snow){
+                        document.getElementById('hrpop').innerHTML = `<span class="iw"></span> ${Math.round(hrdt.pop * 100)} % - ${hrdt.snow['1h']} mm`
+                    }
+                    if(hrdt.rain && !hrdt.snow){
+                        document.getElementById('hrpop').innerHTML = `<span class="iw"></span> ${Math.round(hrdt.pop * 100)} % - ${hrdt.rain['1h']} mm`
+                    }
+                    if(!hrdt.rain && !hrdt.snow){
+                        document.getElementById('hrpop').innerHTML = ` ${hrdt.pop * 100} % - brak opadów`
+                    }
+                    //document.getElementById('hrpop').innerHTML = ` ${hrdt.pop * 100} % - ${hrdt.rain['1h']} mm`
                     document.getElementById('hrpres').innerHTML = ` ${hrdt.pressure} hPa`
                     document.getElementById('hrhr').innerHTML = ` ${checkTime(timehr.getHours())}:${checkTime(timehr.getMinutes())}`
                     document.getElementById('hrfl').innerHTML = ` ${toC(hrdt.feels_like)}`
@@ -134,7 +135,7 @@ function pos(pos) {
                     console.log(hrdt)
                 }
             }
-            document.getElementById('hr1').click();
+            document.getElementById('hr0').click();
             for (n = 0; n < 7; n++) {
                 var d = new Date(data.daily[n].dt * 1000);
                 var day = document.createElement('DIV')
@@ -153,6 +154,7 @@ function pos(pos) {
                 dyhr.className = 'time'
                 dyhr.innerHTML = (d.getDate()) + '.' + (d.getMonth() + 1)
                 day.appendChild(dyhr)
+                day.id = n+'dy'
                 dyicon.setAttribute('src', icons(data.daily[n].weather[0].icon))
                 dyicon.className = 'icon'
                 day.appendChild(dyicon)
@@ -163,10 +165,38 @@ function pos(pos) {
                 document.getElementById('row4').appendChild(day)
                 day.onclick = function (e) {
                     var dydt = JSON.parse(e.currentTarget.getAttribute('data'))
-                    //document.getElementById('row6').innerHTML = JSON.stringify(dydt)
+                    var timedy = new Date(dydt.dt * 1000)
+                    var sunset = new Date(dydt.sunset * 1000)
+                    var sunrise = new Date(dydt.sunrise * 1000)
+                    if(!dydt.rain && dydt.snow){
+                        document.getElementById('dypop').innerHTML = `<span class="iw"></span> ${Math.round(dydt.pop * 100)} % - ${dydt.snow} mm`
+                    }
+                    if(dydt.rain && !dydt.snow){
+                        document.getElementById('dypop').innerHTML = `<span class="iw"></span> ${Math.round(dydt.pop * 100)} % - ${dydt.rain} mm`
+                    }
+                    if(!dydt.rain && !dydt.snow){
+                        document.getElementById('dypop').innerHTML = ` ${dydt.pop * 100} % - brak opadów`
+                    }
+                    //document.getElementById('hrpop').innerHTML = ` ${hrdt.pop * 100} % - ${hrdt.rain['1h']} mm`
+                    document.getElementById('dypres').innerHTML = ` ${dydt.pressure} hPa`
+                    document.getElementById('dyhr').innerHTML = ` ${timedy.getDate()}.${timedy.getMonth() + 1}`
+                    document.getElementById('dyss').innerHTML = ` ${checkTime(sunset.getHours())}:${checkTime(sunset.getMinutes())}`
+                    document.getElementById('dysr').innerHTML = ` ${checkTime(sunrise.getHours())}:${checkTime(sunrise.getMinutes())}`
+                    document.getElementById('dyhum').innerHTML = ` ${dydt.humidity}%`
+                    document.getElementById('dywindicon').style.transform = 'rotate(' + dydt.wind_deg + 'deg)';
+                    document.getElementById('dywindspeed').innerHTML = (Math.round(dydt.wind_speed * 10) / 10) + 'm/s'
+                    document.getElementById('1dytemp').innerText = toC(dydt.temp.morn)
+                    document.getElementById('1dyfl').innerText = toC(dydt.feels_like.morn)
+                    document.getElementById('2dytemp').innerText = toC(dydt.temp.day)
+                    document.getElementById('2dyfl').innerText = toC(dydt.feels_like.day)
+                    document.getElementById('3dytemp').innerText = toC(dydt.temp.eve)
+                    document.getElementById('3dyfl').innerText = toC(dydt.feels_like.eve)
+                    document.getElementById('4dytemp').innerText = toC(dydt.temp.night)
+                    document.getElementById('4dyfl').innerText = toC(dydt.feels_like.night)
                     console.log(dydt)
                 }
             }
+            document.getElementById('0dy').click();
             console.log(JSON.parse(document.getElementsByClassName('hour')[0].getAttribute('data')))
         })
         .then(data => {

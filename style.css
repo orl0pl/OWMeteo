@@ -119,6 +119,7 @@
             border-top: 0.5vh solid var(--now-b);
         }
         #row6 {
+            margin-left: 30px;
             overflow-x: auto;
             white-space: nowrap;
             border-top: 0.5vh solid var(--now-b);
@@ -237,6 +238,35 @@
         }
 
         #hrwind {
+            display: inline-block;
+            position: relative;
+            left: 2vh;
+        }
+        .microbox {
+            display: inline-block;
+            width: fit-content;
+            margin-left: 8px;
+            text-align: center;
+            border: 0.3vh solid #09f;
+        }
+        .microbox ul {
+            width: 100%;
+        }
+        .microsvg {
+            width: 15vw;
+        }
+        .microtemp {
+            font-size: 200%;
+            text-align: center;
+        }
+        .microtime {
+            font-size: 115%;
+            border-bottom: 0.2vw solid #09f;
+        }
+        .microfl {
+            font-size: 100%;
+        }
+        #dywind {
             display: inline-block;
             position: relative;
             left: 2vh;
