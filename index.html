@@ -14,7 +14,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="language" content="Polish">
 
-    <title>Document</title>
+    <title>Pogoda</title>
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet">
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
     <link rel="stylesheet" href="style.css">
@@ -67,14 +67,7 @@
             <h1 class="blueglass" id="city">Twoja Lokalizacja</h1>
             <div class="mediumbox blueglass" id="mediumbox1">
                 <div id="temp">-</div>
-                <ul>
-                    <li></li>
-                </ul>
-
-                <div id="wind">
-                    <div id="windspeed">-m/s</div>
-                    <img id="windicon" src="weather-icons-master/svg/wi-wind-deg.svg">
-                </div>
+                <div class="widget"><div><img src="wphoto/air.png"></div><div class="span"><span class="boldblue">Jakość powietrza:</span><br><span id="aqi">Neutralna</span></div>
             </div>
 
         </div>
@@ -141,7 +134,7 @@
         </div>
         <div id="map"></div>
     </div>
-    <footer>Thanks for icons from erikflowers ❤ | 3.4.22 relase</footer>
+    <footer>Thanks for icons from erikflowers and from icons8 | 26.4.22 relase</footer>
 </body>
 
 </html>

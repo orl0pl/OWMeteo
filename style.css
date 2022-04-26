@@ -1,15 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+
 @font-face {
     font-family: 'weathericons';
     src: url(weather-icons-master/font/weathericons-regular-webfont.ttf);
 }
-.iw{
+
+.iw {
     font-family: 'weathericons';
 }
+
 @media (hover: none) and (pointer: coarse) {
     body {
         font-size: 16px;
     }
+
     .minibox {
         width: 200px;
         height: 300px;
@@ -24,250 +28,318 @@
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     }
 }
-        #rain { 
-            display: inline;
-        }
-        #bar { 
-            display: inline;
-        }
-        ul {
-            margin-block: 0;
-            margin-inline: 0;
-            padding-inline: 0;
-            display: inline-block;
-            vertical-align: super;
-            list-style: none;
-        }
-        .blueglass {
-            background-color: #09f1 !important;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(3.8px);
-        }
-        h3 { 
-            margin: 8px 0px 0px 8px;
-        }
-        #topcon h3{
-            color: #fff;
-            background-color: #09f1;
-            padding: 0.5vh;
-            border-radius: 0.5vh;
-            width: min-content;
-        }
-        body {
-            margin: 0px;
-        }
-        :root {
-            --background: #fff;
-            --now-b: #09f;
-            --text: #000;
 
-        }
-        html {
-            font-family: 'Ubuntu', sans-serif;
-            background-color: var(--background);
-            user-select: none;
-            color: var(--text);
-        }
-        .minibox {
-            width: 20vh;
-            height: 28vh;
-            background-color: var(--background);
-            border-radius: 1vh;
-            margin-left: 1vw;
-            margin-right: 1vw;
-            margin-top: 1vh;
-            margin-bottom: 1vh;
-            display: inline-block;
-            border: 2px solid #ddd;
-            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-        }
-        .mediumbox {
-            display: flexbox;
-            width: 50vw;
-            background-color: #09f8;
-            border-radius: 4px;
-            left: auto;
-            right: auto;
-            display: inline-block;
-            color: #fff;
-            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-        }
-        #row1 h1 {
-            color: #fff;
-            background-color: #09fa;
-            margin: 1vh 0vh 0vh 1vh;
-            display: block;
-            width: fit-content;
-        }
-        #row1 {
-            margin: 8px 0px 0px 8px;
-            overflow-x: auto;
-            background-size: 100vw;
-            white-space: nowrap;
-            /*background-image: linear-gradient(to bottom, #fff0, #ffff);*/
-        }
+#row2 ::-webkit-scrollbar {
+    width: auto;
+}
 
-        #row2 {
-            overflow-x: auto;
-            white-space: nowrap;
-            background-image: linear-gradient(to bottom, #fff0, #ffff);
-        }
+/* Handle */
+#row2 ::-webkit-scrollbar-thumb {
+    background: #0002;
+}
 
-        #row3 {
-            overflow-x: auto;
-            white-space: nowrap;
-            border-top: 0.5vh solid var(--now-b);
-        }
-        #row6 {
-            margin-left: 30px;
-            overflow-x: auto;
-            white-space: nowrap;
-            border-top: 0.5vh solid var(--now-b);
-        }
-        #row4 {
-            overflow-x: auto;
+/* Handle on hover */
+#row2 ::-webkit-scrollbar-thumb:hover {
+    background: #0001;
+}
 
-            white-space: nowrap;
-        }
+#row2 ::-webkit-scrollbar-track {
+    background: rgb(255, 0, 0);
+}
 
-        .minibox .content {
-            background-color: var(--background);
-            color: var(--text);
-            width: min-content;
-            font-size: 6vh;
-            text-align: center;
-            border-top: 0.1vh solid var(--now-b); 
-            margin: 0% auto 0% auto;
-        }
+#rain {
+    display: inline;
+}
 
-        .minibox .time {
-            background-color: var(--background);
-            color: var(--text);
-            margin: 0;
-            text-align: center;
-            width: 50%;
-            position: relative;
-            left: 25%;
-            border: 0.2vw solid var(--now-b);
-            border-top: 0vh solid #fff; 
-            border-radius: 0vh 0vh 1vh 1vh;
-        }
+#bar {
+    display: inline;
+}
 
-        .icon {
-            text-align: center;
-            margin: 0 1.5vh;
-            width: 17vh;
-        }
+ul {
+    margin-block: 0;
+    margin-inline: 0;
+    padding-inline: 0;
+    display: inline-block;
+    vertical-align: super;
+    list-style: none;
+}
 
-        .mediumbox #icon {
-            align-self: center;
-            height: 20vh;
-            display: inline-block;
-            margin-left: 0.01vw;
-            filter: invert(1);
-        }
+.blueglass {
+    background-color: #09f1 !important;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(3.8px);
+}
+
+h3 {
+    margin: 8px 0px 0px 8px;
+}
+
+#topcon h3 {
+    color: #fff;
+    background-color: #09f1;
+    padding: 0.5vh;
+    border-radius: 0.5vh;
+    width: min-content;
+}
+
+body {
+    margin: 0px;
+}
+
+:root {
+    --background: #fff;
+    --now-b: #09f;
+    --text: #000;
+
+}
+
+html {
+    font-family: 'Ubuntu', sans-serif;
+    background-color: var(--background);
+    user-select: none;
+    color: var(--text);
+}
+
+.minibox {
+    width: 20vh;
+    height: 28vh;
+    background-color: var(--background);
+    border-radius: 1vh;
+    margin-left: 1vw;
+    margin-right: 1vw;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+    display: inline-block;
+    border: 2px solid #ddd;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.mediumbox {
+    display: flexbox;
+    width: 50vw;
+    background-color: #09f8;
+    border-radius: 4px;
+    left: auto;
+    right: auto;
+    display: inline-block;
+    color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+#row1 h1 {
+    color: #fff;
+    background-color: #09fa;
+    margin: 1vh 0vh 0vh 1vh;
+    display: block;
+    width: fit-content;
+}
+
+#row1 {
+    margin: 8px 0px 0px 8px;
+    overflow-x: auto;
+    background-size: 100vw;
+    white-space: nowrap;
+    /*background-image: linear-gradient(to bottom, #fff0, #ffff);*/
+}
+
+#row2 {
+    overflow-x: auto;
+    white-space: nowrap;
+    background-image: linear-gradient(to bottom, #fff0, #ffff);
+}
+
+#row3 {
+    overflow-x: auto;
+    white-space: nowrap;
+    border-top: 0.5vh solid var(--now-b);
+}
+
+#row6 {
+    margin-left: 30px;
+    overflow-x: auto;
+    white-space: nowrap;
+    border-top: 0.5vh solid var(--now-b);
+}
+
+#row4 {
+    overflow-x: auto;
+
+    white-space: nowrap;
+}
+
+.minibox .content {
+    background-color: var(--background);
+    color: var(--text);
+    width: min-content;
+    font-size: 6vh;
+    text-align: center;
+    border-top: 0.1vh solid var(--now-b);
+    margin: 0% auto 0% auto;
+}
+
+.minibox .time {
+    background-color: var(--background);
+    color: var(--text);
+    margin: 0;
+    text-align: center;
+    width: 50%;
+    position: relative;
+    left: 25%;
+    border: 0.2vw solid var(--now-b);
+    border-top: 0vh solid #fff;
+    border-radius: 0vh 0vh 1vh 1vh;
+}
+
+.icon {
+    text-align: center;
+    margin: 0 1.5vh;
+    width: 17vh;
+}
+
+.mediumbox #icon {
+    align-self: center;
+    height: 20vh;
+    display: inline-block;
+    margin-left: 0.01vw;
+    filter: invert(1);
+}
 
 
-        .mediumbox #temp {
-            font-size: 9vh;
-            margin: 1vh;
-            display: inline-block;
-            color: #fff;
-        }
+.mediumbox #temp {
+    font-size: 9vh;
+    margin: 1vh;
+    display: inline-block;
+    color: #fff;
+}
 
-        .mediumbox #time {
-            align-self: center;
-            display: inline-block;
-            position: relative;
-            left: -7vh;
-        }
+.mediumbox #time {
+    align-self: center;
+    display: inline-block;
+    position: relative;
+    left: -7vh;
+}
 
-        #lang {
-            position: absolue;
-            right: 0px;
-        }
+#lang {
+    position: absolue;
+    right: 0px;
+}
 
-        #windicon {
-            height: 7vh;
-            filter: invert(1)
-        }
+#windicon {
+    height: 7vh;
+    filter: invert(1)
+}
 
-        #wind {
-            display: inline-block;
-            position: relative;
-            left: 40vh;
-        }
+#wind {
+    display: none;
+}
 
-        .minibox .icon {
-            filter: invert(46%) sepia(82%) saturate(3527%) hue-rotate(183deg) brightness(103%) contrast(104%);
-        }
-        input[type=search] {
-            margin: 8px 0px 0px 8px;
-            width: 70vw;
-            color: #fff;
-            height: 5vh;
-            background-color: var(--now-b);
-            border: none !important;
-            border-radius: 2vh 0vh 0vh 2vh;
-            font-family: 'Ubuntu', sans-serif;
-        }
-        button {
-            width: 20vw;
-            height: 5vh;
-            border: none !important;
-            background-color: #0ef;
-            font-family: 'Ubuntu', sans-serif;
-            border-radius: 0vh 2vh 2vh 0vh;
-        }
-        ::placeholder {
-            color: #fff;
-        }
-        #map { height: 40vh; }
-        #selector div{
-            display: inline-block;
-            background-color: #24e;
-            color: #fff;
-            padding: 5px;
-            border: 0.1vw solid #eee;
-        }
-        #selector div:hover{
-            background-color: #09f;
-        }
-        #hrwindicon {
-            height: 7vh;
-        }
+.minibox .icon {
+    filter: invert(46%) sepia(82%) saturate(3527%) hue-rotate(183deg) brightness(103%) contrast(104%);
+}
 
-        #hrwind {
-            display: inline-block;
-            position: relative;
-            left: 2vh;
-        }
-        .microbox {
-            display: inline-block;
-            width: fit-content;
-            margin-left: 8px;
-            text-align: center;
-            border: 0.3vh solid #09f;
-        }
-        .microbox ul {
-            width: 100%;
-        }
-        .microsvg {
-            width: 15vw;
-        }
-        .microtemp {
-            font-size: 200%;
-            text-align: center;
-        }
-        .microtime {
-            font-size: 115%;
-            border-bottom: 0.2vw solid #09f;
-        }
-        .microfl {
-            font-size: 100%;
-        }
-        #dywind {
-            display: inline-block;
-            position: relative;
-            left: 2vh;
-        }
+input[type=search] {
+    margin: 8px 0px 0px 8px;
+    width: 70vw;
+    color: #fff;
+    height: 5vh;
+    background-color: var(--now-b);
+    border: none !important;
+    border-radius: 2vh 0vh 0vh 2vh;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+button {
+    width: 20vw;
+    height: 5vh;
+    border: none !important;
+    background-color: #0ef;
+    font-family: 'Ubuntu', sans-serif;
+    border-radius: 0vh 2vh 2vh 0vh;
+}
+
+::placeholder {
+    color: #fff;
+}
+
+#map {
+    height: 40vh;
+}
+
+#selector div {
+    display: inline-block;
+    background-color: #24e;
+    color: #fff;
+    padding: 5px;
+    border: 0.1vw solid #eee;
+}
+
+#selector div:hover {
+    background-color: #09f;
+}
+
+#hrwindicon {
+    height: 7vh;
+}
+
+#hrwind {
+    display: inline-block;
+    position: relative;
+    left: 2vh;
+}
+
+.microbox {
+    display: inline-block;
+    width: fit-content;
+    margin-left: 8px;
+    text-align: center;
+    border: 0.3vh solid #09f;
+}
+
+.microbox ul {
+    width: 100%;
+}
+
+.microsvg {
+    width: 15vw;
+}
+
+.microtemp {
+    font-size: 200%;
+    text-align: center;
+}
+
+.microtime {
+    font-size: 115%;
+    border-bottom: 0.2vw solid #09f;
+}
+
+.microfl {
+    font-size: 100%;
+}
+
+#dywind {
+    display: inline-block;
+    position: relative;
+    left: 2vh;
+}
+
+.widget {
+    padding: 1vh;
+    border-radius: 1vh;
+    display: inline-flex;
+    background-color: #fff;
+}
+.widget img {
+    height: 5vh;
+    background-color: #09f;
+    border-radius: 50%;
+    margin-right: 1vw;
+}
+.widget .span {
+    align-self: center;
+    color: #000;
+}
+.boldblue {
+    color: #05f;
+    font-weight: 600;
+}

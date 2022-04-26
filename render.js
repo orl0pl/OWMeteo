@@ -1,19 +1,19 @@
-function checkTime(i) {if (i < 10) {i = "0" + i;}return i;}
-function toogleMap(layer, status, map){
+function checkTime(i) { if (i < 10) { i = "0" + i; } return i; }
+function toogleMap(layer, status, map) {
     map.setLayoutProperty(layer, 'visibility', status);
 }
 function pos(pos) {
     mapboxgl.accessToken = 'pk.eyJ1Ijoia3ViYXByb2ciLCJhIjoiY2tvaGRuNmcwMTUwdzJzb2Ezc2M4bzI3MiJ9.ZK0lAgyNVVkOAdsBSuqGAQ';
 
     var map = new mapboxgl.Map({
-    container: 'map',
-    style: 'mapbox://styles/kubaprog/ckyokd37z2sg214o4rzsuv8jz',
-    zoom: 9,
-    center: [pos.coords.longitude, pos.coords.latitude]
+        container: 'map',
+        style: 'mapbox://styles/kubaprog/ckyokd37z2sg214o4rzsuv8jz',
+        zoom: 9,
+        center: [pos.coords.longitude, pos.coords.latitude]
     });
     var maker = new mapboxgl.Marker()
-    .setLngLat([pos.coords.longitude, pos.coords.latitude])
-    .addTo(map);
+        .setLngLat([pos.coords.longitude, pos.coords.latitude])
+        .addTo(map);
     map.on('load', function () {
         map.addLayer({
             "id": "clouds",
@@ -30,7 +30,7 @@ function pos(pos) {
             "type": "raster",
             "source": {
                 "type": "raster",
-                "tiles": ["https://tile.openweathermap.org/map/precipitation_new/{z}/{x}/{y}.png?appid=692ca78196d8a5d923f16a3216092f76"],
+                "tiles": ["https://tilecache.rainviewer.com/v2/radar/1650949200/512/{z}/{x}/{y}/1/1_1.png"],
                 "tileSize": 256
             },
             "minzoom": 0,
@@ -55,34 +55,51 @@ function pos(pos) {
             },
             "minzoom": 0,
         });
-        document.getElementById('c').onclick = function() {toogleMap('clouds', 'visible', map);
-        toogleMap('precipitation', 'none', map);
-        toogleMap('wind', 'none', map);
-        toogleMap('temp', 'none', map);
+        document.getElementById('c').onclick = function () {
+            toogleMap('clouds', 'visible', map);
+            toogleMap('precipitation', 'none', map);
+            toogleMap('wind', 'none', map);
+            toogleMap('temp', 'none', map);
         }
-        document.getElementById('r').onclick = function() {toogleMap('clouds', 'none', map);
-        toogleMap('precipitation', 'visible', map);
-        toogleMap('wind', 'none', map);
-        toogleMap('temp', 'none', map);
+        document.getElementById('r').onclick = function () {
+            toogleMap('clouds', 'none', map);
+            toogleMap('precipitation', 'visible', map);
+            toogleMap('wind', 'none', map);
+            toogleMap('temp', 'none', map);
         }
-        document.getElementById('w').onclick = function() {toogleMap('clouds', 'none', map);
-        toogleMap('precipitation', 'none', map);
-        toogleMap('wind', 'visible', map);
-        toogleMap('temp', 'none', map);
+        document.getElementById('w').onclick = function () {
+            toogleMap('clouds', 'none', map);
+            toogleMap('precipitation', 'none', map);
+            toogleMap('wind', 'visible', map);
+            toogleMap('temp', 'none', map);
         }
-        document.getElementById('t').onclick = function() {toogleMap('clouds', 'none', map);
-        toogleMap('precipitation', 'none', map);
-        toogleMap('wind', 'none', map);
-        toogleMap('temp', 'visible', map);
+        document.getElementById('t').onclick = function () {
+            toogleMap('clouds', 'none', map);
+            toogleMap('precipitation', 'none', map);
+            toogleMap('wind', 'none', map);
+            toogleMap('temp', 'visible', map);
         }
-        document.getElementById('n').onclick = function() {toogleMap('clouds', 'visible', map);
-        toogleMap('precipitation', 'visible', map);
-        toogleMap('wind', 'none', map);
-        toogleMap('temp', 'none', map);
+        document.getElementById('n').onclick = function () {
+            toogleMap('clouds', 'visible', map);
+            toogleMap('precipitation', 'visible', map);
+            toogleMap('wind', 'none', map);
+            toogleMap('temp', 'none', map);
         }
         const nav = new mapboxgl.NavigationControl();
         map.addControl(nav, 'bottom-left');
     });
+    fetch(`https://api.openweathermap.org/data/2.5/air_pollution?lat=${pos.coords.latitude}&lon=${pos.coords.longitude}&appid=692ca78196d8a5d923f16a3216092f76`)
+        .then((response => { return response.json(); }))
+        .then((data)=>{
+            console.log(data)
+            var aqi;
+            if(data.list[0].main.aqi = 5){aqi = 'Bardzo Zła'}
+            if(data.list[0].main.aqi = 4){aqi = 'Zła'}
+            if(data.list[0].main.aqi = 3){aqi = 'Przeciętna'}
+            if(data.list[0].main.aqi = 2){aqi = 'Ok'}
+            if(data.list[0].main.aqi = 1){aqi = 'Dobra'}
+            document.getElementById('aqi').innerText = aqi
+        })
     fetch('https://api.openweathermap.org/data/2.5/onecall?lat=' + pos.coords.latitude + '&lon=' + pos.coords.longitude + '&appid=' + '911062246487cff1d7ff93826a7e4078')
         .then((response) => { return response.json(); })
         .then((data) => {
@@ -91,9 +108,6 @@ function pos(pos) {
             console.log(data)
             var now = new Date(data.current.dt * 1000);
             document.getElementById('temp').innerHTML = Math.round((data.current.temp - 273.15)) + 'º';
-            document.getElementById('windicon').style.transform = 'rotate(' + data.current.wind_deg + 'deg)';
-            document.getElementById('windspeed').innerHTML = (Math.round(data.current.wind_speed * 10) / 10) + 'm/s'
-            //rain(data)
             for (i = 0; i < Object.keys(data.hourly).length; i++) {
                 var d = new Date(data.hourly[i].dt * 1000);
                 var hour = document.createElement('DIV')
@@ -116,13 +130,13 @@ function pos(pos) {
                 hour.onclick = function (e) {
                     var hrdt = JSON.parse(e.currentTarget.getAttribute('data'))
                     var timehr = new Date(hrdt.dt * 1000)
-                    if(!hrdt.rain && hrdt.snow){
+                    if (!hrdt.rain && hrdt.snow) {
                         document.getElementById('hrpop').innerHTML = `<span class="iw"></span> ${Math.round(hrdt.pop * 100)} % - ${hrdt.snow['1h']} mm`
                     }
-                    if(hrdt.rain && !hrdt.snow){
+                    if (hrdt.rain && !hrdt.snow) {
                         document.getElementById('hrpop').innerHTML = `<span class="iw"></span> ${Math.round(hrdt.pop * 100)} % - ${hrdt.rain['1h']} mm`
                     }
-                    if(!hrdt.rain && !hrdt.snow){
+                    if (!hrdt.rain && !hrdt.snow) {
                         document.getElementById('hrpop').innerHTML = ` ${hrdt.pop * 100} % - brak opadów`
                     }
                     //document.getElementById('hrpop').innerHTML = ` ${hrdt.pop * 100} % - ${hrdt.rain['1h']} mm`
@@ -154,7 +168,7 @@ function pos(pos) {
                 dyhr.className = 'time'
                 dyhr.innerHTML = (d.getDate()) + '.' + (d.getMonth() + 1)
                 day.appendChild(dyhr)
-                day.id = n+'dy'
+                day.id = n + 'dy'
                 dyicon.setAttribute('src', icons(data.daily[n].weather[0].icon))
                 dyicon.className = 'icon'
                 day.appendChild(dyicon)
@@ -168,13 +182,13 @@ function pos(pos) {
                     var timedy = new Date(dydt.dt * 1000)
                     var sunset = new Date(dydt.sunset * 1000)
                     var sunrise = new Date(dydt.sunrise * 1000)
-                    if(!dydt.rain && dydt.snow){
+                    if (!dydt.rain && dydt.snow) {
                         document.getElementById('dypop').innerHTML = `<span class="iw"></span> ${Math.round(dydt.pop * 100)} % - ${dydt.snow} mm`
                     }
-                    if(dydt.rain && !dydt.snow){
+                    if (dydt.rain && !dydt.snow) {
                         document.getElementById('dypop').innerHTML = `<span class="iw"></span> ${Math.round(dydt.pop * 100)} % - ${dydt.rain} mm`
                     }
-                    if(!dydt.rain && !dydt.snow){
+                    if (!dydt.rain && !dydt.snow) {
                         document.getElementById('dypop').innerHTML = ` ${dydt.pop * 100} % - brak opadów`
                     }
                     //document.getElementById('hrpop').innerHTML = ` ${hrdt.pop * 100} % - ${hrdt.rain['1h']} mm`
@@ -202,8 +216,8 @@ function pos(pos) {
         .then(data => {
             apidata = data;
         });
-        
-        
+
+
 }
 function icons(icon, code) {
     if (icon == '01d') {
